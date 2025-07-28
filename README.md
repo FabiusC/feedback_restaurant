@@ -1,4 +1,7 @@
-# feedback_restaurant
+# Feedback Restaurant API
 
-##Authors
+A RESTful API for managing restaurant reviews and employee analytics.
+
+## Authors
+
 Fabio Andres Hurtado - Juan Sebastian Garnica

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Analytics Dashboard</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>Restaurant Analytics</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link active">Dashboard</a>
+                <a href="../feedback/index.html" class="nav-link">Feedback Form</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Restaurant Analytics Dashboard</h1>
+            <p>
+                Real-time insights into customer satisfaction and employee performance
+            </p>
+        </div>
+
+        <!-- Top Section - Charts and Employee Performance -->
+        <div class="stats-grid">
+            <!-- Chart Speed Service -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <h3>Speed Service Rating</h3>
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="gauge-container half-circle">
+                        <div class="gauge half-circle">
+                            <div class="gauge-fill" id="speed-gauge-fill"></div>
+                            <div class="gauge-text" id="speed-gauge-text">0.0</div>
+                        </div>
+                    </div>
+                    <div class="stat-details">
+                        <div class="stat-item">
+                            <span class="stat-label">Average Rating:</span>
+                            <span class="stat-value" id="speed-average">0.0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Reviews:</span>
+                            <span class="stat-value" id="speed-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Satisfaction Level with Food -->
+            <div class="stat-card">
+                <div class="stat-header">
+                    <h3>Food Satisfaction Rating</h3>
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="gauge-container half-circle">
+                        <div class="gauge half-circle">
+                            <div class="gauge-fill" id="food-gauge-fill"></div>
+                            <div class="gauge-text" id="food-gauge-text">0.0</div>
+                        </div>
+                    </div>
+                    <div class="stat-details">
+                        <div class="stat-item">
+                            <span class="stat-label">Average Rating:</span>
+                            <span class="stat-value" id="food-average">0.0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Reviews:</span>
+                            <span class="stat-value" id="food-count">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Performance Chart (Moved to top-right) -->
+            <div class="stat-card employee-performance-card">
+                <div class="stat-header">
+                    <h3>Employee Performance</h3>
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="employee-chart" id="employee-chart">
+                        <!-- Employee items will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section - Recent Reviews (Full Width) -->
+        <div class="reviews-section-full">
+            <div class="section-header">
+                <div class="section-title">
+                    <i class="fas fa-comments"></i>
+                    <span>Recent Reviews</span>
+                </div>
+                <div class="section-controls">
+                    <!-- Filter Controls -->
+                    <div class="section-controls">
+                        <div class="filter-group-compact">
+                            <label for="date-from">From:</label>
+                            <input type="date" id="date-from" class="filter-input-compact" />
+                        </div>
+                        <div class="filter-group-compact">
+                            <label for="date-to">To:</label>
+                            <input type="date" id="date-to" class="filter-input-compact" />
+                        </div>
+                        <div class="filter-group-compact">
+                            <label for="sort-select">Sort:</label>
+                            <select id="sort-select" class="filter-input-compact">
+                                <option value="recent">Recent</option>
+                                <option value="oldest">Oldest</option>
+                                <option value="positive">Positive</option>
+                                <option value="negative">Negative</option>
+                            </select>
+                        </div>
+                        <button id="clear-filters" class="clear-filters-btn-compact">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <button class="toggle-btn" id="toggle-reviews">
+                        <i class="fas fa-chevron-down"></i>Show Less
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter Information -->
+            <div id="filter-info" class="filter-info">
+                <!-- Filter information will be displayed here -->
+            </div>
+
+            <div class="reviews-container" id="reviews-container">
+                <!-- Review items will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+
+</html>

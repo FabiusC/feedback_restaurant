@@ -1,0 +1,29 @@
+{
+  "name": "reviews-api",
+  "version": "1.0.0",
+  "description": "A lightweight API for managing reviews with analytics features.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "morgan": "^1.10.0",
+    "express-async-handler": "^1.2.0",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "keywords": [
+    "reviews",
+    "api",
+    "express",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "ISC"
+}

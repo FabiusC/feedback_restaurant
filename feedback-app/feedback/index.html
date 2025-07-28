@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Our Service!</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="feedback.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-utensils"></i>
+                <span>Restaurant Feedback</span>
+            </div>
+            <div class="nav-menu">
+                <a href="../dashboard/index.html" class="nav-link">Dashboard</a>
+                <a href="index.html" class="nav-link active">Feedback Form</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Feedback Form Content -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Rate Our Service!</h1>
+            <p>Help us improve by providing your valuable feedback</p>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback-form-container">
+            <form id="feedback-form" class="feedback-form">
+                <!-- Speed Service Rating -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-tachometer-alt"></i>
+                        Rate Speed Service from 1 to 5 Stars
+                    </label>
+                    <div class="star-rating" id="speed-rating">
+                        <input type="radio" name="ratespeedservice" value="1" id="speed-1">
+                        <label for="speed-1" class="star">★</label>
+                        <input type="radio" name="ratespeedservice" value="2" id="speed-2">
+                        <label for="speed-2" class="star">★</label>
+                        <input type="radio" name="ratespeedservice" value="3" id="speed-3">
+                        <label for="speed-3" class="star">★</label>
+                        <input type="radio" name="ratespeedservice" value="4" id="speed-4">
+                        <label for="speed-4" class="star">★</label>
+                        <input type="radio" name="ratespeedservice" value="5" id="speed-5">
+                        <label for="speed-5" class="star">★</label>
+                    </div>
+                    <span class="rating-label" id="speed-label">Select rating</span>
+                </div>
+
+                <!-- Food Satisfaction Rating -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-utensils"></i>
+                        Rate the level of Satisfaction with Food
+                    </label>
+                    <div class="star-rating" id="food-rating">
+                        <input type="radio" name="ratesatisfactionfood" value="1" id="food-1">
+                        <label for="food-1" class="star">★</label>
+                        <input type="radio" name="ratesatisfactionfood" value="2" id="food-2">
+                        <label for="food-2" class="star">★</label>
+                        <input type="radio" name="ratesatisfactionfood" value="3" id="food-3">
+                        <label for="food-3" class="star">★</label>
+                        <input type="radio" name="ratesatisfactionfood" value="4" id="food-4">
+                        <label for="food-4" class="star">★</label>
+                        <input type="radio" name="ratesatisfactionfood" value="5" id="food-5">
+                        <label for="food-5" class="star">★</label>
+                    </div>
+                    <span class="rating-label" id="food-label">Select rating</span>
+                </div>
+
+                <!-- Employee Selection and Rating -->
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-user-friends"></i>
+                        Employee Attitude
+                    </label>
+                    <select id="employee-select" name="idemployee" class="form-control">
+                        <option value="">Select Employee</option>
+                        <!-- Employee options will be populated here -->
+                    </select>
+                    <span class="rating-label" id="employee-label">Select rating</span>
+                    <div class="star-rating" id="employee-rating">
+                        <input type="radio" name="rateemployee" value="1" id="employee-1">
+                        <label for="employee-1" class="star">★</label>
+                        <input type="radio" name="rateemployee" value="2" id="employee-2">
+                        <label for="employee-2" class="star">★</label>
+                        <input type="radio" name="rateemployee" value="3" id="employee-3">
+                        <label for="employee-3" class="star">★</label>
+                        <input type="radio" name="rateemployee" value="4" id="employee-4">
+                        <label for="employee-4" class="star">★</label>
+                        <input type="radio" name="rateemployee" value="5" id="employee-5">
+                        <label for="employee-5" class="star">★</label>
+                    </div>
+                </div>
+
+                <!-- Comment -->
+                <div class="form-group">
+                    <label for="comment">
+                        <i class="fas fa-comment"></i>
+                        Leave a Comment!
+                    </label>
+                    <textarea id="comment" name="comment" class="form-control" rows="4"
+                        placeholder="Share your experience, suggestions, or any additional feedback..."
+                        required></textarea>
+                </div>
+
+                <!-- Public Review -->
+                <div class="form-group">
+                    <label class="checkbox-label" for="ispublic">
+                        <i class="fas fa-eye"></i>
+                        Make this review public
+                    </label>
+                    <input type="checkbox" id="ispublic" name="ispublic" class="form-control">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>THANKS FOR YOUR FEEDBACK</h2>
+            </div>
+            <div class="modal-body">
+                <p>Come back soon!</p>
+                <div class="celebration-illustration">
+                    <div class="hands">
+                        <span class="hand left">👋</span>
+                        <span class="hand right">👋</span>
+                    </div>
+                    <div class="confetti">
+                        <div class="confetti-piece"></div>
+                        <div class="confetti-piece"></div>
+                        <div class="confetti-piece"></div>
+                        <div class="confetti-piece"></div>
+                        <div class="confetti-piece"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script type="module" src="feedback.js"></script>
+</body>
+
+</html>
