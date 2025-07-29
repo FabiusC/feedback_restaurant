@@ -62,6 +62,7 @@ async function fetchPublicReviews() {
         baseUrl: config.api.baseUrl,
         endpoint: config.api.endpoints.reviews.public
     });
+    console.log('Full config object:', config);
 
     try {
         const response = await fetch(url);
@@ -83,6 +84,7 @@ async function fetchEmployees() {
         baseUrl: config.api.baseUrl,
         endpoint: config.api.endpoints.employees.all
     });
+    console.log('Full config object:', config);
 
     try {
         const response = await fetch(url);
