@@ -5,6 +5,12 @@ import EmployeePerformanceModule from './modules/employeePerformance.js';
 import RecentReviewsModule from './modules/recentReviews.js';
 import { config } from '../config.js';
 
+// Debug: Log the config to see if it's imported correctly
+console.log('Config loaded:', config);
+console.log('API Base URL:', config.api.baseUrl);
+console.log('Reviews endpoints:', config.api.endpoints.reviews);
+console.log('Employees endpoints:', config.api.endpoints.employees);
+
 // Global variables
 let reviews = [];
 let employees = [];
@@ -50,8 +56,15 @@ function initializeToggleButton() {
 
 // API calls
 async function fetchPublicReviews() {
+    const url = `${config.api.baseUrl}${config.api.endpoints.reviews.public}`;
+    console.log('Fetching reviews from URL:', url);
+    console.log('Config values:', {
+        baseUrl: config.api.baseUrl,
+        endpoint: config.api.endpoints.reviews.public
+    });
+
     try {
-        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.reviews.public}`);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Failed to fetch reviews');
         }
@@ -64,9 +77,15 @@ async function fetchPublicReviews() {
 }
 
 async function fetchEmployees() {
+    const url = `${config.api.baseUrl}${config.api.endpoints.employees.all}`;
+    console.log('Fetching employees from URL:', url);
+    console.log('Config values:', {
+        baseUrl: config.api.baseUrl,
+        endpoint: config.api.endpoints.employees.all
+    });
+
     try {
-        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.employees.all}`);
-        console.log(`${config.api.baseUrl}${config.api.endpoints.employees.all}`);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Failed to fetch employees');
         }
