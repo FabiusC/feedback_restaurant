@@ -1,4 +1,6 @@
 // Recent Reviews Module
+import { config } from '../../config.js';
+
 class RecentReviewsModule {
     constructor() {
         this.reviews = [];

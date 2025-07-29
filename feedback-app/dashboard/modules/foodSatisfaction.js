@@ -1,4 +1,3 @@
-// Food Satisfaction Module
 class FoodSatisfactionModule {
     constructor() {
         this.reviews = [];

@@ -11,26 +11,15 @@ class Review {
     }
 
     static insertReviewQuery() {
-        return `
-            INSERT INTO review (idemployee, ratespeedservice, ratesatisfactionfood, rateemployee, comment, ispublic)
-            VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING *;
-        `;
+        return `INSERT INTO review (idemployee, ratespeedservice, ratesatisfactionfood, rateemployee, comment, ispublic) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
     }
 
     static getPublicReviewsQuery() {
-        return `
-            SELECT * FROM review
-            WHERE ispublic = true
-            ORDER BY date DESC;
-        `;
+        return `SELECT * FROM review WHERE ispublic = true ORDER BY date DESC`;
     }
 
     static getAllReviewsQuery() {
-        return `
-            SELECT * FROM review
-            ORDER BY date DESC;
-        `;
+        return `SELECT * FROM review ORDER BY date DESC`;
     }
 }
 

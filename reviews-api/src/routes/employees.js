@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Get all employees
-router.get('/employees', getAllEmployees);
+router.get('/', getAllEmployees);
 
 // Get employee by ID
-router.get('/employees/:id', getEmployeeById);
+router.get('/:id', getEmployeeById);
 
 // Create new employee
-router.post('/employees', createEmployee);
+router.post('/', createEmployee);
 
 // Update employee
-router.put('/employees/:id', updateEmployee);
+router.put('/:id', updateEmployee);
 
 // Delete employee (soft delete - sets isactive to false)
-router.delete('/employees/:id', deleteEmployee);
+router.delete('/:id', deleteEmployee);
 
 export default router; 

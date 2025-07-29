@@ -4,7 +4,7 @@ import validateReview from '../middleware/validation.js';
 
 const router = express.Router();
 
-router.post('/reviews', validateReview, submitReview);
-router.get('/reviews/public', getPublicReviews);
+router.post('/', validateReview, submitReview);
+router.get('/public', getPublicReviews);
 
 export default router;

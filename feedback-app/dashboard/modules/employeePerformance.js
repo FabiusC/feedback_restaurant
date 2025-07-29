@@ -1,4 +1,6 @@
 // Employee Performance Module
+import { config } from '../../config.js';
+
 class EmployeePerformanceModule {
     constructor() {
         this.reviews = [];

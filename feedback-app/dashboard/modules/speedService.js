@@ -1,4 +1,6 @@
 // Speed Service Module
+import { config } from '../../config.js';
+
 class SpeedServiceModule {
     constructor() {
         this.reviews = [];

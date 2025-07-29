@@ -8,52 +8,23 @@ class Employee {
     }
 
     static getAllEmployeesQuery() {
-        return `
-            SELECT * FROM employee
-            WHERE isactive = true
-            ORDER BY name ASC;
-        `;
+        return `SELECT * FROM employee WHERE isactive = true`;
     }
 
     static getEmployeeByIdQuery() {
-        return `
-            SELECT * FROM employee
-            WHERE idemployee = $1;
-        `;
-    }
-
-    static getActiveEmployeesQuery() {
-        return `
-            SELECT * FROM employee
-            WHERE isactive = true
-            ORDER BY name ASC;
-        `;
+        return `SELECT * FROM employee WHERE idemployee = $1`;
     }
 
     static createEmployeeQuery() {
-        return `
-            INSERT INTO employee (name, email, isactive)
-            VALUES ($1, $2, $3)
-            RETURNING *;
-        `;
+        return `INSERT INTO employee (name, email, isactive) VALUES ($1, $2, $3) RETURNING *`;
     }
 
     static updateEmployeeQuery() {
-        return `
-            UPDATE employee
-            SET name = $2, email = $3, isactive = $4
-            WHERE idemployee = $1
-            RETURNING *;
-        `;
+        return `UPDATE employee SET name = $2, email = $3, isactive = $4 WHERE idemployee = $1 RETURNING *`;
     }
 
     static deleteEmployeeQuery() {
-        return `
-            UPDATE employee
-            SET isactive = false
-            WHERE idemployee = $1
-            RETURNING *;
-        `;
+        return `UPDATE employee SET isactive = false WHERE idemployee = $1 RETURNING *`;
     }
 }
 

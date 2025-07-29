@@ -3,6 +3,7 @@ import SpeedServiceModule from './modules/speedService.js';
 import FoodSatisfactionModule from './modules/foodSatisfaction.js';
 import EmployeePerformanceModule from './modules/employeePerformance.js';
 import RecentReviewsModule from './modules/recentReviews.js';
+import { config } from '../config.js';
 
 // Global variables
 let reviews = [];
@@ -50,7 +51,7 @@ function initializeToggleButton() {
 // API calls
 async function fetchPublicReviews() {
     try {
-        const response = await fetch('http://localhost:3000/api/reviews/reviews/public');
+        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.reviews.public}`);
         if (!response.ok) {
             throw new Error('Failed to fetch reviews');
         }
@@ -64,7 +65,8 @@ async function fetchPublicReviews() {
 
 async function fetchEmployees() {
     try {
-        const response = await fetch('http://localhost:3000/api/employees/employees');
+        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.employees.all}`);
+        console.log(`${config.api.baseUrl}${config.api.endpoints.employees.all}`);
         if (!response.ok) {
             throw new Error('Failed to fetch employees');
         }
@@ -78,7 +80,8 @@ async function fetchEmployees() {
 
 async function fetchEmployeeStats(employeeId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/employees/employees/${employeeId}/stats`);
+        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`);
+        console.log(`${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`);
         if (!response.ok) {
             throw new Error('Failed to fetch employee stats');
         }
@@ -142,6 +145,6 @@ function hideLoading() {
 }
 
 // Auto-refresh dashboard data every 30 seconds
-setInterval(() => {
-    loadDashboardData();
-}, 30000); 
+// setInterval(() => {
+//     loadDashboardData();
+// }, config.app.autoRefreshInterval); 

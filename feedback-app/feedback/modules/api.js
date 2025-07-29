@@ -1,13 +1,15 @@
 // API Calls Module
+import { config } from '../../config.js';
+
 export class ApiService {
     constructor() {
-        this.baseUrl = 'http://localhost:3000/api';
+        this.baseUrl = config.api.baseUrl;
     }
 
     async fetchEmployees() {
         try {
             console.log('Fetching employees from API...');
-            const response = await fetch(`${this.baseUrl}/employees/employees`);
+            const response = await fetch(`${this.baseUrl}${config.api.endpoints.employees.all}`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,7 +35,7 @@ export class ApiService {
     async submitReview(reviewData) {
         try {
             console.log('Submitting review data:', reviewData);
-            const response = await fetch(`${this.baseUrl}/reviews/reviews`, {
+            const response = await fetch(`${this.baseUrl}${config.api.endpoints.reviews.submit}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
