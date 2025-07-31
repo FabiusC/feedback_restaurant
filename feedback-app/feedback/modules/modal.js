@@ -26,6 +26,8 @@ export class ModalManager {
     closeModal() {
         if (this.successModal) {
             this.successModal.style.display = 'none';
+            // Re route to dashboard after submission
+            window.location.href = '/dashboard';
         }
     }
 } 

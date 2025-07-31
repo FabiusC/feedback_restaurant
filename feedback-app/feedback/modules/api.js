@@ -8,7 +8,6 @@ export class ApiService {
 
     async fetchEmployees() {
         try {
-            console.log('Fetching employees from API...');
             const response = await fetch(`${this.baseUrl}${config.api.endpoints.employees.all}`);
 
             if (!response.ok) {
@@ -16,10 +15,7 @@ export class ApiService {
             }
 
             const data = await response.json();
-            console.log('Employees fetched successfully:', data);
-
             if (Array.isArray(data) && data.length > 0) {
-                console.log('Employees loaded:', data.length, 'employees');
                 return data;
             } else {
                 console.warn('No employees returned from API, using fallback');
@@ -27,7 +23,6 @@ export class ApiService {
             }
         } catch (error) {
             console.error('Error fetching employees:', error);
-            console.log('Using fallback employees due to API error');
             return [];
         }
     }

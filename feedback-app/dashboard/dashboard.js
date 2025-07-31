@@ -5,12 +5,6 @@ import EmployeePerformanceModule from './modules/employeePerformance.js';
 import RecentReviewsModule from './modules/recentReviews.js';
 import { config } from '../config.js';
 
-// Debug: Log the config to see if it's imported correctly
-console.log('Config loaded:', config);
-console.log('API Base URL:', config.api.baseUrl);
-console.log('Reviews endpoints:', config.api.endpoints.reviews);
-console.log('Employees endpoints:', config.api.endpoints.employees);
-
 // Global variables
 let reviews = [];
 let employees = [];
@@ -57,13 +51,6 @@ function initializeToggleButton() {
 // API calls
 async function fetchPublicReviews() {
     const url = `${config.api.baseUrl}${config.api.endpoints.reviews.public}`;
-    console.log('Fetching reviews from URL:', url);
-    console.log('Config values:', {
-        baseUrl: config.api.baseUrl,
-        endpoint: config.api.endpoints.reviews.public
-    });
-    console.log('Full config object:', config);
-
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -79,13 +66,6 @@ async function fetchPublicReviews() {
 
 async function fetchEmployees() {
     const url = `${config.api.baseUrl}${config.api.endpoints.employees.all}`;
-    console.log('Fetching employees from URL:', url);
-    console.log('Config values:', {
-        baseUrl: config.api.baseUrl,
-        endpoint: config.api.endpoints.employees.all
-    });
-    console.log('Full config object:', config);
-
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -102,7 +82,6 @@ async function fetchEmployees() {
 async function fetchEmployeeStats(employeeId) {
     try {
         const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`);
-        console.log(`${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`);
         if (!response.ok) {
             throw new Error('Failed to fetch employee stats');
         }
@@ -166,6 +145,6 @@ function hideLoading() {
 }
 
 // Auto-refresh dashboard data every 30 seconds
-// setInterval(() => {
-//     loadDashboardData();
-// }, config.app.autoRefreshInterval); 
+setInterval(() => {
+    loadDashboardData();
+}, config.app.autoRefreshInterval); 

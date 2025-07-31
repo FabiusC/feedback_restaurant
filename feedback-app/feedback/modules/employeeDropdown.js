@@ -9,9 +9,6 @@ export class EmployeeDropdown {
             console.error('Employee select element not found');
             return;
         }
-
-        console.log('Populating dropdown with:', employees.length, 'employees');
-
         // Clear existing options except the first one
         while (this.employeeSelect.children.length > 1) {
             this.employeeSelect.removeChild(this.employeeSelect.lastChild);
@@ -24,8 +21,6 @@ export class EmployeeDropdown {
             option.textContent = employee.name;
             this.employeeSelect.appendChild(option);
         });
-
-        console.log('Dropdown populated with', employees.length, 'employees');
     }
 
     resetDropdown() {
