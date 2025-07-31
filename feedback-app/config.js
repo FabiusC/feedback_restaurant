@@ -2,7 +2,7 @@
 export const config = {
     // API Configuration
     api: {
-        baseUrl: 'http://localhost:3000/api',
+        baseUrl: 'http://localhost:3000',
         endpoints: {
             reviews: {
                 submit: '/reviews',
