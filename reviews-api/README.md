@@ -139,29 +139,29 @@ La aplicación sigue una arquitectura de capas basada en el diagrama UML proporc
 
 ### Feedback
 
-- `POST /api/feedback/reviews` - Enviar una nueva review
-- `GET /api/feedback/reviews/public` - Obtener reviews públicas
-- `GET /api/feedback/reviews/:id` - Obtener una review específica
-- `PUT /api/feedback/reviews/:id/approve` - Aprobar una review
-- `PUT /api/feedback/reviews/:id/reject` - Rechazar una review
-- `DELETE /api/feedback/reviews/:id` - Eliminar una review
+- `POST /feedback/reviews` - Enviar una nueva review
+- `GET /feedback/reviews/public` - Obtener reviews públicas
+- `GET /feedback/reviews/:id` - Obtener una review específica
+- `PUT /feedback/reviews/:id/approve` - Aprobar una review
+- `PUT /feedback/reviews/:id/reject` - Rechazar una review
+- `DELETE /feedback/reviews/:id` - Eliminar una review
 
 ### Analytics
 
-- `GET /api/analytics/ratings` - Obtener promedios de calificaciones
-- `GET /api/analytics/employees/:id/performance` - Rendimiento de un empleado
-- `GET /api/analytics/employees/performance` - Rendimiento de todos los empleados
-- `GET /api/analytics/employees/top-performers` - Mejores empleados
-- `GET /api/analytics/reports/monthly` - Generar reporte mensual
-- `POST /api/analytics/reports/custom` - Generar reporte personalizado
-- `GET /api/analytics/trends` - Obtener tendencias de rendimiento
+- `GET /analytics/ratings` - Obtener promedios de calificaciones
+- `GET /analytics/employees/:id/performance` - Rendimiento de un empleado
+- `GET /analytics/employees/performance` - Rendimiento de todos los empleados
+- `GET /analytics/employees/top-performers` - Mejores empleados
+- `GET /analytics/reports/monthly` - Generar reporte mensual
+- `POST /analytics/reports/custom` - Generar reporte personalizado
+- `GET /analytics/trends` - Obtener tendencias de rendimiento
 
 ## 📝 Ejemplos de Uso
 
 ### Enviar una Review
 
 ```bash
-curl -X POST http://localhost:3000/api/feedback/reviews \
+curl -X POST http://localhost:3000/feedback/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "ratespeedservice": 4,
@@ -176,7 +176,7 @@ curl -X POST http://localhost:3000/api/feedback/reviews \
 **Nota:** También se aceptan los nombres de campos anteriores para compatibilidad:
 
 ```bash
-curl -X POST http://localhost:3000/api/feedback/reviews \
+curl -X POST http://localhost:3000/feedback/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "speedRating": 4,
@@ -191,19 +191,19 @@ curl -X POST http://localhost:3000/api/feedback/reviews \
 ### Obtener Reviews Públicas
 
 ```bash
-curl http://localhost:3000/api/feedback/reviews/public?sortBy=rating
+curl http://localhost:3000/feedback/reviews/public?sortBy=rating
 ```
 
 ### Obtener Promedios de Calificaciones
 
 ```bash
-curl http://localhost:3000/api/analytics/ratings
+curl http://localhost:3000/analytics/ratings
 ```
 
 ### Generar Reporte Mensual
 
 ```bash
-curl http://localhost:3000/api/analytics/reports/monthly
+curl http://localhost:3000/analytics/reports/monthly
 ```
 
 ## 🧪 Scripts Disponibles

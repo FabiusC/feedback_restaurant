@@ -33,10 +33,9 @@ export class FeedbackService {
 
       // Check if employee exists and is active (only if employee is selected)
       let employee = null;
-      if (dto.getIdEmployeeSelected() !== null) {
-        employee = await this.employeeRepository.findById(
-          dto.getIdEmployeeSelected()
-        );
+      const employeeId = dto.getIdEmployeeSelected();
+      if (employeeId !== null) {
+        employee = await this.employeeRepository.findById(employeeId);
         if (!employee) {
           return {
             success: false,
@@ -62,7 +61,7 @@ export class FeedbackService {
         dto.getIdEmployeeSelected(),
         dto.getEmployeeRating(),
         dto.getComment(),
-        dto.getIsPublic()
+        dto.getIsPublic() || false
       );
 
       // Validate review entity

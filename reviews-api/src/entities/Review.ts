@@ -45,6 +45,10 @@ export class Review {
     return this.idemployee;
   }
 
+  public getIdEmployeeSelected(): number | null {
+    return this.idemployee;
+  }
+
   public getEmployeeRating(): number | null {
     return this.rateemployee;
   }
@@ -61,6 +65,27 @@ export class Review {
     return this.date;
   }
 
+  // Setters
+  public setSpeedRating(rating: number): void {
+    this.ratespeedservice = rating;
+  }
+
+  public setFoodRating(rating: number): void {
+    this.ratesatisfactionfood = rating;
+  }
+
+  public setEmployeeRating(rating: number | null): void {
+    this.rateemployee = rating;
+  }
+
+  public setComment(comment: string): void {
+    this.comment = comment;
+  }
+
+  public setIsPublic(isPublic: boolean): void {
+    this.ispublic = isPublic;
+  }
+
   // Business methods
   public validate(): boolean {
     // Validar que las calificaciones estén entre 1 y 5
@@ -73,7 +98,12 @@ export class Review {
     }
 
     // Validar que si hay empleado, debe haber calificación de empleado
-    if (this.idemployee !== null && (this.rateemployee === null || this.rateemployee < 1 || this.rateemployee > 5)) {
+    if (
+      this.idemployee !== null &&
+      (this.rateemployee === null ||
+        this.rateemployee < 1 ||
+        this.rateemployee > 5)
+    ) {
       return false;
     }
 
@@ -87,8 +117,8 @@ export class Review {
       return false;
     }
 
-    // Validar que el comentario no exceda 500 caracteres
-    if (this.comment && this.comment.length > 500) {
+    // Validar que el comentario no exceda 1000 caracteres
+    if (this.comment && this.comment.length > 1000) {
       return false;
     }
 
@@ -112,6 +142,9 @@ export class Review {
     if (this.rateemployee !== null) {
       totalRatings.push(this.rateemployee);
     }
-    return totalRatings.reduce((sum, rating) => sum + rating, 0) / totalRatings.length;
+    return (
+      totalRatings.reduce((sum, rating) => sum + rating, 0) /
+      totalRatings.length
+    );
   }
 }

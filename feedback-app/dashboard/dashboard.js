@@ -51,6 +51,7 @@ function initializeToggleButton() {
 // API calls
 async function fetchPublicReviews() {
     const url = `${config.api.baseUrl}${config.api.endpoints.reviews.public}`;
+    console.log(url);
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -66,6 +67,7 @@ async function fetchPublicReviews() {
 
 async function fetchEmployees() {
     const url = `${config.api.baseUrl}${config.api.endpoints.employees.all}`;
+    console.log(url);
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -80,8 +82,10 @@ async function fetchEmployees() {
 }
 
 async function fetchEmployeeStats(employeeId) {
+    const url = `${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`;
+    console.log(url);
     try {
-        const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.employees.stats(employeeId)}`);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Failed to fetch employee stats');
         }

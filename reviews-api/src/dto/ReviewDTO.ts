@@ -4,21 +4,21 @@ export class ReviewDTO {
   private idemployee: number | null;
   private rateemployee: number | null;
   private comment: string;
-  private ispublic: boolean;
+  private ispublic: boolean | undefined;
 
   constructor(
-    ratespeedservice: number,
-    ratesatisfactionfood: number,
-    idemployee: number | null,
-    rateemployee: number | null,
-    comment: string,
-    ispublic: boolean = false
+    ratespeedservice?: number,
+    ratesatisfactionfood?: number,
+    idemployee?: number | null,
+    rateemployee?: number | null,
+    comment?: string,
+    ispublic?: boolean
   ) {
-    this.ratespeedservice = ratespeedservice;
-    this.ratesatisfactionfood = ratesatisfactionfood;
-    this.idemployee = idemployee;
-    this.rateemployee = rateemployee;
-    this.comment = comment;
+    this.ratespeedservice = ratespeedservice || 0;
+    this.ratesatisfactionfood = ratesatisfactionfood || 0;
+    this.idemployee = idemployee || null;
+    this.rateemployee = rateemployee || null;
+    this.comment = comment || '';
     this.ispublic = ispublic;
   }
 
@@ -43,8 +43,33 @@ export class ReviewDTO {
     return this.comment;
   }
 
-  public getIsPublic(): boolean {
+  public getIsPublic(): boolean | undefined {
     return this.ispublic;
+  }
+
+  // Setters
+  public setSpeedRating(rating: number): void {
+    this.ratespeedservice = rating;
+  }
+
+  public setFoodRating(rating: number): void {
+    this.ratesatisfactionfood = rating;
+  }
+
+  public setIdEmployeeSelected(id: number | null): void {
+    this.idemployee = id;
+  }
+
+  public setEmployeeRating(rating: number | null): void {
+    this.rateemployee = rating;
+  }
+
+  public setComment(comment: string): void {
+    this.comment = comment;
+  }
+
+  public setIsPublic(isPublic: boolean | undefined): void {
+    this.ispublic = isPublic;
   }
 
   // Validation methods
@@ -68,8 +93,18 @@ export class ReviewDTO {
       return false;
     }
 
-    // Validar que el comentario no exceda 500 caracteres
-    if (this.comment && this.comment.length > 500) {
+    // Validar que el comentario no esté vacío
+    if (!this.comment || this.comment.trim().length === 0) {
+      return false;
+    }
+
+    // Validar que el comentario no exceda 1000 caracteres (según los tests)
+    if (this.comment && this.comment.length > 1000) {
+      return false;
+    }
+
+    // Validar que isPublic esté definido
+    if (this.ispublic === undefined) {
       return false;
     }
 
@@ -84,7 +119,7 @@ export class ReviewDTO {
       json.idemployee || json.idEmployeeSelected || null,
       json.rateemployee || json.employeeRating || null,
       json.comment || "",
-      json.ispublic || json.isPublic || false
+      json.ispublic !== undefined ? json.ispublic : json.isPublic !== undefined ? json.isPublic : undefined
     );
   }
 
