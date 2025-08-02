@@ -16,8 +16,15 @@ class RecentReviewsModule {
 
     // Set data
     setData(reviews, employees) {
-        this.reviews = reviews;
-        this.employees = employees;
+        // Ensure reviews and employees are arrays
+        this.reviews = Array.isArray(reviews) ? reviews : [];
+        this.employees = Array.isArray(employees) ? employees : [];
+        console.log('RecentReviewsModule setData:', {
+            reviewsCount: this.reviews.length,
+            employeesCount: this.employees.length,
+            reviewsType: typeof reviews,
+            employeesType: typeof employees
+        });
         this.applyFilters();
     }
 

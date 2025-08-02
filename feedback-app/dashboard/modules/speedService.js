@@ -7,7 +7,11 @@ class SpeedServiceModule {
     }
 
     setReviews(reviews) {
-        this.reviews = reviews;
+        this.reviews = Array.isArray(reviews) ? reviews : [];
+        console.log('SpeedServiceModule setReviews:', {
+            reviewsCount: this.reviews.length,
+            reviewsType: typeof reviews
+        });
     }
 
     getSpeedServiceData() {

@@ -4,7 +4,11 @@ class FoodSatisfactionModule {
     }
 
     setReviews(reviews) {
-        this.reviews = reviews;
+        this.reviews = Array.isArray(reviews) ? reviews : [];
+        console.log('FoodSatisfactionModule setReviews:', {
+            reviewsCount: this.reviews.length,
+            reviewsType: typeof reviews
+        });
     }
 
     getFoodSatisfactionData() {

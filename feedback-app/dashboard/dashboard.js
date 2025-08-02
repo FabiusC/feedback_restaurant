@@ -57,7 +57,11 @@ async function fetchPublicReviews() {
         if (!response.ok) {
             throw new Error('Failed to fetch reviews');
         }
-        reviews = await response.json();
+        const result = await response.json();
+        console.log('Reviews API response:', result);
+        // Extract the data array from the API response
+        reviews = result.data || result;
+        console.log('Extracted reviews:', reviews);
         return reviews;
     } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -73,7 +77,11 @@ async function fetchEmployees() {
         if (!response.ok) {
             throw new Error('Failed to fetch employees');
         }
-        employees = await response.json();
+        const result = await response.json();
+        console.log('Employees API response:', result);
+        // Extract the data array from the API response
+        employees = result.data || result;
+        console.log('Extracted employees:', employees);
         return employees;
     } catch (error) {
         console.error('Error fetching employees:', error);
@@ -121,6 +129,7 @@ async function loadDashboardData() {
 
 // Update modules with fresh data
 function updateModulesData() {
+    console.log('Updating modules with data:', { reviewsCount: reviews.length, employeesCount: employees.length });
     speedServiceModule.setReviews(reviews);
     foodSatisfactionModule.setReviews(reviews);
     employeePerformanceModule.setData(reviews, employees);

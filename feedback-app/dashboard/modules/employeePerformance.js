@@ -9,8 +9,14 @@ class EmployeePerformanceModule {
 
     // Set data
     setData(reviews, employees) {
-        this.reviews = reviews;
-        this.employees = employees;
+        this.reviews = Array.isArray(reviews) ? reviews : [];
+        this.employees = Array.isArray(employees) ? employees : [];
+        console.log('EmployeePerformanceModule setData:', {
+            reviewsCount: this.reviews.length,
+            employeesCount: this.employees.length,
+            reviewsType: typeof reviews,
+            employeesType: typeof employees
+        });
     }
 
     // Get employee performance data
