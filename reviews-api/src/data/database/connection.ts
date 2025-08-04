@@ -75,8 +75,6 @@ class DatabaseConnection {
           date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
       `);
-
-      console.log("✅ Database tables initialized successfully");
     } catch (error) {
       console.error("❌ Error initializing database tables:", error);
       throw error;

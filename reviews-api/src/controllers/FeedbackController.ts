@@ -16,8 +16,8 @@ export class FeedbackController {
       if (!req.body || Object.keys(req.body).length === 0) {
         res.status(400).json({
           success: false,
-          message: 'Datos de entrada requeridos',
-          error: 'El cuerpo de la solicitud está vacío o es inválido'
+          message: "Input data required",
+          error: "The request body is empty or invalid",
         });
         return;
       }
@@ -31,15 +31,17 @@ export class FeedbackController {
       const result = await this.feedbackService.submitReview(reviewDTO);
 
       if (result.success) {
-        res.status(201).json(result);
+        res.status(200).json(result);
       } else {
         // Map specific error messages to appropriate status codes
-        if (result.message === "Empleado no encontrado") {
+        if (result.message === "Employee not found") {
           res.status(404).json(result);
-        } else if (result.message === "Empleado inactivo") {
+        } else if (result.message === "Inactive employee") {
           res.status(400).json(result);
-        } else if (result.message === "Error interno del servidor") {
+        } else if (result.message === "Internal server error") {
           res.status(500).json(result);
+        } else if (result.message === "Invalid review data types") {
+          res.status(400).json(result);
         } else {
           res.status(400).json(result);
         }
@@ -48,8 +50,8 @@ export class FeedbackController {
       console.error("Error in submitReview controller:", error);
       res.status(500).json({
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error inesperado al procesar la solicitud",
+        message: "Internal server error",
+        error: "An unexpected error occurred while processing the request",
       });
     }
   }
@@ -72,15 +74,15 @@ export class FeedbackController {
 
       res.status(200).json({
         success: true,
-        message: 'Reviews públicas obtenidas exitosamente',
-        data: reviewsData
+        message: "Public reviews obtained successfully",
+        data: reviewsData,
       });
     } catch (error) {
       console.error("Error in getPublicReviews controller:", error);
       res.status(500).json({
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error inesperado al obtener las reviews",
+        message: "Internal server error",
+        error: "An unexpected error occurred while obtaining the reviews",
       });
     }
   }

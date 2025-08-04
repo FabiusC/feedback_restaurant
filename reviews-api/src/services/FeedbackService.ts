@@ -2,6 +2,7 @@ import { ReviewRepository } from "../data/repositories/ReviewRepository";
 import { EmployeeRepository } from "../data/repositories/EmployeeRepository";
 import { Review } from "../entities/Review";
 import { ReviewDTO } from "../dto/ReviewDTO";
+import { ErrorManager } from "../utils/ErrorManager";
 
 export interface Response {
   success: boolean;
@@ -13,10 +14,12 @@ export interface Response {
 export class FeedbackService {
   private reviewRepository: ReviewRepository;
   private employeeRepository: EmployeeRepository;
+  private errorManager: ErrorManager;
 
   constructor() {
     this.reviewRepository = new ReviewRepository();
     this.employeeRepository = new EmployeeRepository();
+    this.errorManager = ErrorManager.getInstance();
   }
 
   public async submitReview(dto: ReviewDTO): Promise<Response> {
@@ -25,9 +28,8 @@ export class FeedbackService {
       if (!dto.validate()) {
         return {
           success: false,
-          message: "Datos de review inválidos",
-          error:
-            "Los datos proporcionados no cumplen con los requisitos de validación",
+          message: "Invalid review data",
+          error: "The provided data does not meet the validation requirements",
         };
       }
 
@@ -39,16 +41,16 @@ export class FeedbackService {
         if (!employee) {
           return {
             success: false,
-            message: "Empleado no encontrado",
-            error: "El empleado especificado no existe en el sistema",
+            message: "Employee not found",
+            error: "The specified employee does not exist in the system",
           };
         }
 
         if (!employee.getIsActive()) {
           return {
             success: false,
-            message: "Empleado inactivo",
-            error: "El empleado especificado no está activo",
+            message: "Inactive employee",
+            error: "The specified employee is inactive",
           };
         }
       }
@@ -68,8 +70,8 @@ export class FeedbackService {
       if (!review.validate()) {
         return {
           success: false,
-          message: "Review inválida",
-          error: "La review no cumple con las reglas de validación",
+          message: "Invalid review",
+          error: "The review does not meet the validation rules",
         };
       }
 
@@ -78,10 +80,10 @@ export class FeedbackService {
 
       return {
         success: true,
-        message: "Review enviada exitosamente",
+        message: "Review sent successfully",
         data: {
           reviewId: savedReview.getId(),
-          employeeName: employee?.getName() || "No especificado",
+          employeeName: employee?.getName() || "Not specified",
           averageRating: savedReview.getAverageRating(),
         },
       };
@@ -89,8 +91,8 @@ export class FeedbackService {
       console.error("Error submitting review:", error);
       return {
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error al procesar la review",
+        message: "Internal server error",
+        error: "An error occurred while processing the review",
       };
     }
   }

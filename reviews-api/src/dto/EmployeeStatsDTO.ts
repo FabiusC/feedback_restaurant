@@ -51,8 +51,11 @@ export class EmployeeStatsDTO {
     if (this.averageemployeerating > 0) {
       ratings.push(this.averageemployeerating);
     }
-    const averageRating = ratings.length > 0 ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length : 0;
-    
+    const averageRating =
+      ratings.length > 0
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length
+        : 0;
+
     return {
       totalReviews: this.reviewcount,
       averageRating: averageRating,
@@ -89,10 +92,10 @@ export class EmployeeStatsDTO {
 
   // Performance indicators
   public getPerformanceLevel(): string {
-    if (this.averageemployeerating >= 4.5) return "Excelente";
-    if (this.averageemployeerating >= 4.0) return "Muy Bueno";
-    if (this.averageemployeerating >= 3.5) return "Bueno";
+    if (this.averageemployeerating >= 4.5) return "Excellent";
+    if (this.averageemployeerating >= 4.0) return "Very Good";
+    if (this.averageemployeerating >= 3.5) return "Good";
     if (this.averageemployeerating >= 3.0) return "Regular";
-    return "Necesita Mejora";
+    return "Needs Improvement";
   }
 }
