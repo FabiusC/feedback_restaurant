@@ -41,7 +41,7 @@ app.use("/", analyticsRoutes);
 // Root endpoint
 app.get("/", (req, res) => {
   res.json({
-    message: "API de Feedback de Restaurante",
+    message: "Restaurant Feedback API",
     version: "1.0.0",
     endpoints: {
       health: "/health",
@@ -51,12 +51,12 @@ app.get("/", (req, res) => {
     },
     documentation: {
       reviews: {
-        "POST /reviews": "Enviar una nueva review",
-        "GET /reviews/public": "Obtener reviews públicas",
+        "POST /reviews": "Submit a new review",
+        "GET /reviews/public": "Get public reviews",
       },
       employees: {
-        "GET /employees": "Obtener todos los empleados activos",
-        "GET /employees/:id/stats": "Obtener estadísticas de un empleado",
+        "GET /employees": "Get all active employees",
+        "GET /employees/:id/stats": "Get employee statistics",
       },
     },
   });
@@ -66,8 +66,8 @@ app.get("/", (req, res) => {
 app.use("*", (req, res) => {
   res.status(404).json({
     success: false,
-    message: "Endpoint no encontrado",
-    error: `La ruta ${req.originalUrl} no existe`,
+    message: "Endpoint not found",
+    error: `The route ${req.originalUrl} does not exist`,
   });
 });
 
@@ -82,11 +82,11 @@ app.use(
     console.error("Unhandled error:", error);
     res.status(500).json({
       success: false,
-      message: "Error interno del servidor",
+      message: "Internal server error",
       error:
         process.env.NODE_ENV === "development"
           ? error.message
-          : "Ocurrió un error inesperado",
+          : "An unexpected error occurred",
     });
   }
 );
@@ -97,7 +97,6 @@ async function startServer() {
     // Initialize database connection and tables
     const db = DatabaseConnection.getInstance();
     await db.initializeTables();
-    console.log("✅ Database initialized successfully");
 
     // Start server
     app.listen(PORT, () => {
@@ -114,14 +113,12 @@ async function startServer() {
 
 // Graceful shutdown
 process.on("SIGTERM", async () => {
-  console.log("🛑 SIGTERM received, shutting down gracefully");
   const db = DatabaseConnection.getInstance();
   await db.close();
   process.exit(0);
 });
 
 process.on("SIGINT", async () => {
-  console.log("🛑 SIGINT received, shutting down gracefully");
   const db = DatabaseConnection.getInstance();
   await db.close();
   process.exit(0);

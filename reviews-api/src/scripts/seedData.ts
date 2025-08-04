@@ -40,7 +40,7 @@ async function seedData() {
         4,
         1,
         5,
-        "Excelente servicio, muy atento y amable. La comida estaba deliciosa.",
+        "Excellent service, very attentive and friendly. The food was delicious.",
         true
       ),
       new Review(
@@ -49,10 +49,10 @@ async function seedData() {
         5,
         1,
         4,
-        "Muy buen servicio, la comida excelente. Recomendado.",
+        "Very good service, the food is excellent. Recommended.",
         true
       ),
-      new Review(0, 3, 4, 1, 4, "Buen servicio, la comida estaba bien.", false),
+      new Review(0, 3, 4, 1, 4, "Good service, the food was good.", false),
 
       // Reviews for María García (ID: 2)
       new Review(
@@ -61,7 +61,7 @@ async function seedData() {
         5,
         2,
         5,
-        "María es una excelente mesera, muy profesional y amigable.",
+        "Maria is an excellent waitress, very professional and friendly.",
         true
       ),
       new Review(
@@ -70,7 +70,7 @@ async function seedData() {
         4,
         2,
         5,
-        "Muy buen servicio, María es muy atenta.",
+        "Very good service, Maria is very attentive.",
         true
       ),
       new Review(
@@ -79,30 +79,22 @@ async function seedData() {
         4,
         2,
         4,
-        "Excelente atención, la comida muy buena.",
+        "Excellent attention, the food is very good.",
         true
       ),
 
       // Reviews for Carlos López (ID: 3)
-      new Review(
-        0,
-        3,
-        4,
-        3,
-        3,
-        "Servicio regular, la comida estaba bien.",
-        false
-      ),
+      new Review(0, 3, 4, 3, 3, "Regular service, the food was good.", false),
       new Review(
         0,
         4,
         3,
         3,
         4,
-        "Buen servicio, la comida podría mejorar.",
+        "Good service, the food could be improved.",
         false
       ),
-      new Review(0, 5, 4, 3, 4, "Mejoró mucho el servicio, muy bien.", true),
+      new Review(0, 5, 4, 3, 4, "The service improved a lot, very good.", true),
 
       // Reviews for Ana Rodríguez (ID: 4)
       new Review(
@@ -111,24 +103,32 @@ async function seedData() {
         5,
         4,
         5,
-        "Ana es fantástica, muy profesional y amigable.",
+        "Ana is fantastic, very professional and friendly.",
         true
       ),
-      new Review(0, 4, 5, 4, 5, "Excelente servicio, Ana es muy atenta.", true),
+      new Review(
+        0,
+        4,
+        5,
+        4,
+        5,
+        "Excellent service, Ana is very attentive.",
+        true
+      ),
       new Review(
         0,
         5,
         4,
         4,
         5,
-        "Muy buen servicio, la comida deliciosa.",
+        "Very good service, the food is delicious.",
         true
       ),
 
       // Reviews for Luis Martínez (ID: 5)
-      new Review(0, 4, 4, 5, 4, "Buen servicio, Luis es muy amable.", true),
-      new Review(0, 3, 4, 5, 3, "Servicio aceptable, la comida bien.", false),
-      new Review(0, 4, 5, 5, 4, "Muy buena comida, servicio correcto.", true),
+      new Review(0, 4, 4, 5, 4, "Good service, Luis is very friendly.", true),
+      new Review(0, 3, 4, 5, 3, "Acceptable service, the food is good.", false),
+      new Review(0, 4, 5, 5, 4, "Very good food, correct service.", true),
     ];
 
     console.log("📝 Creating reviews...");
