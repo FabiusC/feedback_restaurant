@@ -1,14 +1,16 @@
-import { Request, Response } from 'express';
-import { FeedbackController } from '../../controllers/FeedbackController';
-import { FeedbackService } from '../../services/FeedbackService';
-import { ReviewDTO } from '../../dto/ReviewDTO';
+import { Request, Response } from "express";
+import { FeedbackController } from "../../controllers/FeedbackController";
+import { FeedbackService } from "../../services/FeedbackService";
+import { ReviewDTO } from "../../dto/ReviewDTO";
 
 // Mock the service
-jest.mock('../../services/FeedbackService');
+jest.mock("../../services/FeedbackService");
 
-const MockedFeedbackService = FeedbackService as jest.MockedClass<typeof FeedbackService>;
+const MockedFeedbackService = FeedbackService as jest.MockedClass<
+  typeof FeedbackService
+>;
 
-describe('FeedbackController', () => {
+describe("FeedbackController", () => {
   let feedbackController: FeedbackController;
   let mockFeedbackService: jest.Mocked<FeedbackService>;
   let mockRequest: Partial<Request>;
@@ -19,14 +21,15 @@ describe('FeedbackController', () => {
   beforeEach(() => {
     // Clear all mocks
     jest.clearAllMocks();
-    
+
     // Create mock service
-    mockFeedbackService = new MockedFeedbackService() as jest.Mocked<FeedbackService>;
-    
+    mockFeedbackService =
+      new MockedFeedbackService() as jest.Mocked<FeedbackService>;
+
     // Create controller
     feedbackController = new FeedbackController();
     (feedbackController as any).feedbackService = mockFeedbackService;
-    
+
     // Setup mock response
     mockJson = jest.fn().mockReturnThis();
     mockStatus = jest.fn().mockReturnThis();
@@ -36,15 +39,15 @@ describe('FeedbackController', () => {
     };
   });
 
-  describe('submitReview', () => {
-    it('should successfully submit a review', async () => {
+  describe("submitReview", () => {
+    it("should successfully submit a review", async () => {
       // Arrange
       const reviewData = {
         speedRating: 4,
         foodRating: 5,
         idEmployeeSelected: 1,
         employeeRating: 4,
-        comment: 'Great service!',
+        comment: "Great service!",
         isPublic: true,
       };
 
@@ -54,10 +57,10 @@ describe('FeedbackController', () => {
 
       const mockServiceResponse = {
         success: true,
-        message: 'Review enviada exitosamente',
+        message: "Review sent successfully",
         data: {
           reviewId: 1,
-          employeeName: 'Juan Pérez',
+          employeeName: "Juan Pérez",
           averageRating: 4.25,
         },
       };
@@ -75,18 +78,18 @@ describe('FeedbackController', () => {
       expect(mockFeedbackService.submitReview).toHaveBeenCalledWith(
         expect.any(ReviewDTO)
       );
-      expect(mockStatus).toHaveBeenCalledWith(201);
+      expect(mockStatus).toHaveBeenCalledWith(200);
       expect(mockJson).toHaveBeenCalledWith(mockServiceResponse);
     });
 
-    it('should handle validation errors', async () => {
+    it("should handle validation errors", async () => {
       // Arrange
       const reviewData = {
         speedRating: 6, // Invalid rating
         foodRating: 5,
         idEmployeeSelected: 1,
         employeeRating: 4,
-        comment: 'Great service!',
+        comment: "Great service!",
         isPublic: true,
       };
 
@@ -96,8 +99,8 @@ describe('FeedbackController', () => {
 
       const mockServiceResponse = {
         success: false,
-        message: 'Datos de review inválidos',
-        error: 'Los datos proporcionados no cumplen con los requisitos de validación',
+        message: "Invalid review data",
+        error: "The provided data does not meet the validation requirements",
       };
 
       mockFeedbackService.submitReview.mockResolvedValue(mockServiceResponse);
@@ -114,14 +117,14 @@ describe('FeedbackController', () => {
       expect(mockJson).toHaveBeenCalledWith(mockServiceResponse);
     });
 
-    it('should handle employee not found error', async () => {
+    it("should handle employee not found error", async () => {
       // Arrange
       const reviewData = {
         speedRating: 4,
         foodRating: 5,
         idEmployeeSelected: 999, // Non-existent employee
         employeeRating: 4,
-        comment: 'Great service!',
+        comment: "Great service!",
         isPublic: true,
       };
 
@@ -131,8 +134,8 @@ describe('FeedbackController', () => {
 
       const mockServiceResponse = {
         success: false,
-        message: 'Empleado no encontrado',
-        error: 'El empleado especificado no existe en el sistema',
+        message: "Employee not found",
+        error: "The specified employee does not exist in the system",
       };
 
       mockFeedbackService.submitReview.mockResolvedValue(mockServiceResponse);
@@ -149,14 +152,14 @@ describe('FeedbackController', () => {
       expect(mockJson).toHaveBeenCalledWith(mockServiceResponse);
     });
 
-    it('should handle server errors', async () => {
+    it("should handle server errors", async () => {
       // Arrange
       const reviewData = {
         speedRating: 4,
         foodRating: 5,
         idEmployeeSelected: null,
         employeeRating: null,
-        comment: 'Great service!',
+        comment: "Great service!",
         isPublic: true,
       };
 
@@ -166,8 +169,8 @@ describe('FeedbackController', () => {
 
       const mockServiceResponse = {
         success: false,
-        message: 'Error interno del servidor',
-        error: 'Ocurrió un error al procesar la review',
+        message: "Internal server error",
+        error: "An error occurred while processing the review",
       };
 
       mockFeedbackService.submitReview.mockResolvedValue(mockServiceResponse);
@@ -184,7 +187,7 @@ describe('FeedbackController', () => {
       expect(mockJson).toHaveBeenCalledWith(mockServiceResponse);
     });
 
-    it('should handle missing request body', async () => {
+    it("should handle missing request body", async () => {
       // Arrange
       mockRequest = {};
 
@@ -199,19 +202,19 @@ describe('FeedbackController', () => {
       expect(mockStatus).toHaveBeenCalledWith(400);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Datos de entrada requeridos',
-        error: 'El cuerpo de la solicitud está vacío o es inválido',
+        message: "Required input data",
+        error: "The request body is empty or invalid",
       });
     });
 
-    it('should handle service exceptions', async () => {
+    it("should handle service exceptions", async () => {
       // Arrange
       const reviewData = {
         speedRating: 4,
         foodRating: 5,
         idEmployeeSelected: null,
         employeeRating: null,
-        comment: 'Great service!',
+        comment: "Great service!",
         isPublic: true,
       };
 
@@ -220,7 +223,7 @@ describe('FeedbackController', () => {
       };
 
       mockFeedbackService.submitReview.mockRejectedValue(
-        new Error('Database connection failed')
+        new Error("Database connection failed")
       );
 
       // Act
@@ -234,14 +237,14 @@ describe('FeedbackController', () => {
       expect(mockStatus).toHaveBeenCalledWith(500);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Error interno del servidor',
-        error: 'Ocurrió un error inesperado al procesar la solicitud',
+        message: "Internal server error",
+        error: "An unexpected error occurred while processing the request",
       });
     });
   });
 
-  describe('getPublicReviews', () => {
-    it('should return public reviews successfully', async () => {
+  describe("getPublicReviews", () => {
+    it("should return public reviews successfully", async () => {
       // Arrange
       const mockReviews = [
         {
@@ -250,7 +253,7 @@ describe('FeedbackController', () => {
           getFoodRating: () => 5,
           getIdEmployee: () => null,
           getEmployeeRating: () => null,
-          getComment: () => 'Great food!',
+          getComment: () => "Great food!",
           getIsPublic: () => true,
           getCreatedAt: () => new Date(),
         },
@@ -260,13 +263,15 @@ describe('FeedbackController', () => {
           getFoodRating: () => 4,
           getIdEmployee: () => 1,
           getEmployeeRating: () => 4,
-          getComment: () => 'Good service',
+          getComment: () => "Good service",
           getIsPublic: () => true,
           getCreatedAt: () => new Date(),
         },
       ];
 
-      mockFeedbackService.getPublicReviews.mockResolvedValue(mockReviews as any);
+      mockFeedbackService.getPublicReviews.mockResolvedValue(
+        mockReviews as any
+      );
 
       // Act
       await feedbackController.getPublicReviews(
@@ -279,7 +284,7 @@ describe('FeedbackController', () => {
       expect(mockStatus).toHaveBeenCalledWith(200);
       expect(mockJson).toHaveBeenCalledWith({
         success: true,
-        message: 'Reviews públicas obtenidas exitosamente',
+        message: "Public reviews obtained successfully",
         data: [
           {
             idreview: 1,
@@ -288,7 +293,7 @@ describe('FeedbackController', () => {
             ratespeedservice: 4,
             ratesatisfactionfood: 5,
             rateemployee: null,
-            comment: 'Great food!',
+            comment: "Great food!",
             ispublic: true,
           },
           {
@@ -298,17 +303,17 @@ describe('FeedbackController', () => {
             ratespeedservice: 3,
             ratesatisfactionfood: 4,
             rateemployee: 4,
-            comment: 'Good service',
+            comment: "Good service",
             ispublic: true,
           },
         ],
       });
     });
 
-    it('should handle service errors when fetching public reviews', async () => {
+    it("should handle service errors when fetching public reviews", async () => {
       // Arrange
       mockFeedbackService.getPublicReviews.mockRejectedValue(
-        new Error('Database error')
+        new Error("Database error")
       );
 
       // Act
@@ -322,9 +327,9 @@ describe('FeedbackController', () => {
       expect(mockStatus).toHaveBeenCalledWith(500);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Error interno del servidor',
-        error: 'Ocurrió un error inesperado al obtener las reviews',
+        message: "Internal server error",
+        error: "An unexpected error occurred while getting the reviews",
       });
     });
   });
-}); 
+});

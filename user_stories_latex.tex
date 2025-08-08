@@ -1,0 +1,89 @@
+\subsection{Requirements Analysis}
+\label{subsec:requirements}
+The project began with a **stakeholder-centric requirements gathering** phase:
+\begin{itemize}
+    \item \textbf{Functional Requirements}:
+    \begin{itemize}
+        \item Star-rating submission for service, food, and employees.
+        \item Public review display with filters (date, rating).
+        \item Real-time dashboard for managers.
+    \end{itemize}
+    \item \textbf{Non-Functional Requirements}:
+    \begin{itemize}
+        \item API response time < 500ms under 100+ concurrent users.
+        \item Mobile-responsive UI.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{User Stories}
+\label{subsubsec:user_stories}
+
+Based on the requirements analysis, the following user stories were identified and prioritized:
+
+\begin{table}[h]
+\centering
+\caption{User Stories for Restaurant Feedback System}
+\label{tab:user_stories}
+\begin{tabular}{|p{0.8cm}|p{3.5cm}|p{0.8cm}|p{0.8cm}|p{6cm}|p{6cm}|}
+\hline
+\textbf{US} & \textbf{Title} & \textbf{Priority} & \textbf{Estimate} & \textbf{User Story} & \textbf{Acceptance Criteria} \\
+\hline
+US 01 & Rate Speed Service from 1 to 5 stars & 2 & 3 & As a customer, I want to rate the speed of service on a scale of 1 to 5 stars so that my feedback contributes to improving service efficiency. & Given I am presented with the option to rate "Speed Service", when I select a star rating between 1 and 5, then my chosen rating is recorded for analysis. \\
+\hline
+US 02 & Rate the level of Satisfaction with Food from 1 to 5 stars & 1 & 3 & As a customer, I want to rate my satisfaction with the food on a scale of 1 to 5 stars so that my input helps the restaurant enhance food quality. & Given I am presented with the option to rate "Satisfaction with Food", when I select a star rating between 1 and 5, then my chosen rating is recorded for analysis. \\
+\hline
+US 03 & Select Employee to Rate & 3 & 2 & As a customer, I want to select a specific employee to rate so that my feedback can be attributed to the correct individual for recognition or improvement. & Given I am presented with a list or selection mechanism for employees, when I choose an employee from the available options, then the selected employee is associated with the subsequent feedback. \\
+\hline
+US 04 & Rate Employee Attitude from 1 to 5 stars & 2 & 3 & As a customer, I want to rate the employee's attitude on a scale of 1 to 5 stars so that management can assess and improve employee interactions. & Given I have selected an employee and am presented with the option to rate "Employee Attitude", when I select a star rating between 1 and 5, then my chosen rating is recorded for the selected employee. \\
+\hline
+US 05 & Leave a comment about our service (max 500 characters) & 1 & 3 & As a customer, I want to leave a detailed comment about my service experience, up to 500 characters, so that I can provide specific feedback that helps the restaurant understand my visit better. & Given I am presented with a comment box, when I type my feedback into the box (up to 500 characters), then my comment is saved and associated with my overall feedback. \\
+\hline
+US 06 & Press "Submit" Button & 1 & 1 & As a customer, I want to press a "Submit" button so that my ratings and comments are officially sent to the restaurant. & Given I have completed all required fields, when I press the "Submit" button, then my feedback is successfully submitted to the system. \\
+\hline
+US 07 & Display Thanks Message & 1 & 1 & As a customer, I want to see a "Thanks" message after submitting my feedback so that I know my input was successfully received. & Given I have successfully submitted my feedback, when the system processes my submission, then a "Thank You" message is displayed on the screen. \\
+\hline
+US 08 & Navigate from QR code (on table) & 1 & 2 & As a customer, I want to scan a QR code on my table to quickly access the feedback form so that I don't have to manually search for it. & Given I am at a restaurant table with a QR code, When I scan the QR code with my phone's camera, Then I am redirected to the feedback form page. \\
+\hline
+US 09 & Access with an URL & 2 & 1 & As a customer, I want to access the feedback form via a direct URL so that I can provide feedback even if I don't have a QR scanner. & Given I have the feedback form URL, When I enter the URL in my browser, Then the feedback form loads correctly. \\
+\hline
+US 10 & View Average Ratings per Category & 2 & 5 & As a restaurant manager, I want to view average ratings for each feedback category (e.g., Speed Service, Food Satisfaction) so that I can quickly assess overall performance and identify areas for improvement. & Given I access the feedback dashboard, when I navigate to the "Average Ratings" section, then I see the average star ratings for "Speed Service," "Satisfaction with Food," and "Employee Attitude." \\
+\hline
+US 11 & Read Customer Comments & 1 & 3 & As a restaurant manager, I want to read individual customer comments so that I can gain specific insights into customer experiences and address any issues mentioned. & Given I access the feedback dashboard, when I navigate to the "Customer Comments" section, then I can view a list of all submitted comments. \\
+\hline
+US 12 & Sort or Filter Comments by Date & 2 & 3 & As a restaurant manager, I want to sort or filter customer comments by date so that I can review the most recent feedback first. & Given I am in the "Customer Comments" section, When I select a "Sort by Date" option (ascending/descending), Then the comments are displayed in the chosen order. \\
+\hline
+US 13 & Leave a Message to a Specific Employee & 1 & 5 & As a customer, I want to leave a message for a specific employee (e.g., compliments or concerns) so that the restaurant can recognize or address individual performance. & Given I am filling out the feedback form, When I select an employee from a dropdown list and write a comment, Then the comment is tagged to that employee in the manager's dashboard. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Priority and Estimation Guidelines}
+\label{subsubsec:priority_estimation}
+
+\begin{itemize}
+    \item \textbf{Priority Levels}:
+    \begin{itemize}
+        \item \textbf{Priority 1}: High priority (Critical features)
+        \item \textbf{Priority 2}: Medium priority (Important features)
+        \item \textbf{Priority 3}: Low priority (Nice-to-have features)
+    \end{itemize}
+    \item \textbf{Story Point Estimation}:
+    \begin{itemize}
+        \item \textbf{1 point}: Simple task (1-2 hours)
+        \item \textbf{2 points}: Small task (3-4 hours)
+        \item \textbf{3 points}: Medium task (5-8 hours)
+        \item \textbf{5 points}: Complex task (1-2 days)
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{User Stories Summary}
+\label{subsubsec:user_stories_summary}
+
+The user stories are distributed across three priority levels:
+\begin{itemize}
+    \item \textbf{High Priority (7 stories)}: Core functionality including food satisfaction rating, customer comments, form submission, QR code access, and essential manager dashboard features.
+    \item \textbf{Medium Priority (5 stories)}: Important features such as speed service rating, employee attitude rating, URL access, and analytics dashboard functionality.
+    \item \textbf{Low Priority (1 story)}: Employee selection functionality for targeted feedback.
+\end{itemize}
+
+The total estimated effort for all user stories is \textbf{35 story points}, with the majority of effort concentrated on high-priority features that deliver immediate value to both customers and restaurant management. 

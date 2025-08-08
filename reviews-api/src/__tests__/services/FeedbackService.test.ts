@@ -45,7 +45,7 @@ describe("FeedbackService", () => {
       reviewDTO.setFoodRating(5);
       reviewDTO.setIdEmployeeSelected(1);
       reviewDTO.setEmployeeRating(4);
-      reviewDTO.setComment("Excelente servicio");
+      reviewDTO.setComment("Excellent service");
       reviewDTO.setIsPublic(true);
 
       const mockEmployee = new Employee(1, "Juan Pérez", "true");
@@ -55,7 +55,7 @@ describe("FeedbackService", () => {
         5,
         1,
         4,
-        "Excelente servicio",
+        "Excellent service",
         true
       );
 
@@ -76,7 +76,7 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(true);
-      expect(result.message).toBe("Review enviada exitosamente");
+      expect(result.message).toBe("Review sent successfully");
       expect(result.data).toEqual({
         reviewId: 1,
         employeeName: "Juan Pérez",
@@ -103,9 +103,9 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Datos de review inválidos");
+      expect(result.message).toBe("Invalid review data");
       expect(result.error).toBe(
-        "Los datos proporcionados no cumplen con los requisitos de validación"
+        "The provided data does not meet the validation requirements"
       );
       expect(mockReviewRepository.save).not.toHaveBeenCalled();
     });
@@ -131,9 +131,9 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Empleado no encontrado");
+      expect(result.message).toBe("Employee not found");
       expect(result.error).toBe(
-        "El empleado especificado no existe en el sistema"
+        "The specified employee does not exist in the system"
       );
       expect(mockReviewRepository.save).not.toHaveBeenCalled();
     });
@@ -166,8 +166,8 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Empleado inactivo");
-      expect(result.error).toBe("El empleado especificado no está activo");
+      expect(result.message).toBe("Inactive employee");
+      expect(result.error).toBe("The specified employee is inactive");
       expect(mockReviewRepository.save).not.toHaveBeenCalled();
     });
 
@@ -194,8 +194,10 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Error interno del servidor");
-      expect(result.error).toBe("Ocurrió un error al procesar la review");
+      expect(result.message).toBe("Internal server error");
+      expect(result.error).toBe(
+        "An error occurred while processing the review"
+      );
     });
 
     it("should successfully submit review without employee", async () => {
@@ -205,7 +207,7 @@ describe("FeedbackService", () => {
       reviewDTO.setFoodRating(5);
       reviewDTO.setIdEmployeeSelected(null);
       reviewDTO.setEmployeeRating(null);
-      reviewDTO.setComment("Excelente comida");
+      reviewDTO.setComment("Excellent food");
       reviewDTO.setIsPublic(true);
 
       const mockSavedReview = new Review(
@@ -214,7 +216,7 @@ describe("FeedbackService", () => {
         5,
         null,
         null,
-        "Excelente comida",
+        "Excellent food",
         true
       );
 
@@ -232,10 +234,10 @@ describe("FeedbackService", () => {
 
       // Assert
       expect(result.success).toBe(true);
-      expect(result.message).toBe("Review enviada exitosamente");
+      expect(result.message).toBe("Review sent successfully");
       expect(result.data).toEqual({
         reviewId: 1,
-        employeeName: "No especificado",
+        employeeName: "Not specified",
         averageRating: 4.5, // (4+5)/2
       });
       expect(mockEmployeeRepository.findById).not.toHaveBeenCalled();

@@ -28,8 +28,8 @@ export class AnalyticsController {
       console.error("Error in getEmployees controller:", error);
       res.status(500).json({
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error al obtener los empleados",
+        message: "Internal server error",
+        error: "An error occurred while getting the employees",
       });
     }
   }
@@ -44,8 +44,8 @@ export class AnalyticsController {
       if (isNaN(employeeId)) {
         res.status(400).json({
           success: false,
-          message: "ID de empleado inválido",
-          error: "El ID debe ser un número válido",
+          message: "Invalid employee ID",
+          error: "The ID must be a valid number",
         });
         return;
       }
@@ -61,14 +61,14 @@ export class AnalyticsController {
       if (error instanceof Error && error.message === "Employee not found") {
         res.status(404).json({
           success: false,
-          message: "Empleado no encontrado",
-          error: "El empleado especificado no existe",
+          message: "Employee not found",
+          error: "The specified employee does not exist",
         });
       } else {
         res.status(500).json({
           success: false,
-          message: "Error interno del servidor",
-          error: "Ocurrió un error al obtener el rendimiento del empleado",
+          message: "Internal server error",
+          error: "An error occurred while getting the employee performance",
         });
       }
     }

@@ -1,18 +1,22 @@
-import { Request, Response } from 'express';
-import { AnalyticsController } from '../../controllers/AnalyticsController';
-import { AnalyticsService } from '../../services/AnalyticsService';
-import { EmployeeRepository } from '../../data/repositories/EmployeeRepository';
-import { Employee } from '../../entities/Employee';
-import { EmployeeStatsDTO } from '../../dto/EmployeeStatsDTO';
+import { Request, Response } from "express";
+import { AnalyticsController } from "../../controllers/AnalyticsController";
+import { AnalyticsService } from "../../services/AnalyticsService";
+import { EmployeeRepository } from "../../data/repositories/EmployeeRepository";
+import { Employee } from "../../entities/Employee";
+import { EmployeeStatsDTO } from "../../dto/EmployeeStatsDTO";
 
 // Mock the services and repositories
-jest.mock('../../services/AnalyticsService');
-jest.mock('../../data/repositories/EmployeeRepository');
+jest.mock("../../services/AnalyticsService");
+jest.mock("../../data/repositories/EmployeeRepository");
 
-const MockedAnalyticsService = AnalyticsService as jest.MockedClass<typeof AnalyticsService>;
-const MockedEmployeeRepository = EmployeeRepository as jest.MockedClass<typeof EmployeeRepository>;
+const MockedAnalyticsService = AnalyticsService as jest.MockedClass<
+  typeof AnalyticsService
+>;
+const MockedEmployeeRepository = EmployeeRepository as jest.MockedClass<
+  typeof EmployeeRepository
+>;
 
-describe('AnalyticsController', () => {
+describe("AnalyticsController", () => {
   let analyticsController: AnalyticsController;
   let mockAnalyticsService: jest.Mocked<AnalyticsService>;
   let mockEmployeeRepository: jest.Mocked<EmployeeRepository>;
@@ -24,16 +28,18 @@ describe('AnalyticsController', () => {
   beforeEach(() => {
     // Clear all mocks
     jest.clearAllMocks();
-    
+
     // Create mock services
-    mockAnalyticsService = new MockedAnalyticsService() as jest.Mocked<AnalyticsService>;
-    mockEmployeeRepository = new MockedEmployeeRepository() as jest.Mocked<EmployeeRepository>;
-    
+    mockAnalyticsService =
+      new MockedAnalyticsService() as jest.Mocked<AnalyticsService>;
+    mockEmployeeRepository =
+      new MockedEmployeeRepository() as jest.Mocked<EmployeeRepository>;
+
     // Create controller
     analyticsController = new AnalyticsController();
     (analyticsController as any).analyticsService = mockAnalyticsService;
     (analyticsController as any).employeeRepository = mockEmployeeRepository;
-    
+
     // Setup mock response
     mockJson = jest.fn().mockReturnThis();
     mockStatus = jest.fn().mockReturnThis();
@@ -43,15 +49,17 @@ describe('AnalyticsController', () => {
     };
   });
 
-  describe('getEmployees', () => {
-    it('should return active employees successfully', async () => {
+  describe("getEmployees", () => {
+    it("should return active employees successfully", async () => {
       // Arrange
       const mockEmployees = [
-        new Employee(1, 'Juan Pérez', 'juan@example.com', true),
-        new Employee(2, 'María García', 'maria@example.com', true),
+        new Employee(1, "Juan Pérez", "juan@example.com", true),
+        new Employee(2, "María García", "maria@example.com", true),
       ];
 
-      mockEmployeeRepository.findActiveEmployees.mockResolvedValue(mockEmployees);
+      mockEmployeeRepository.findActiveEmployees.mockResolvedValue(
+        mockEmployees
+      );
 
       // Act
       await analyticsController.getEmployees(
@@ -60,27 +68,29 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(1);
+      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(
+        1
+      );
       expect(mockStatus).toHaveBeenCalledWith(200);
       expect(mockJson).toHaveBeenCalledWith([
         {
           idemployee: 1,
-          name: 'Juan Pérez',
-          email: 'juan@example.com',
+          name: "Juan Pérez",
+          email: "juan@example.com",
           isactive: true,
           createdat: expect.any(Date),
         },
         {
           idemployee: 2,
-          name: 'María García',
-          email: 'maria@example.com',
+          name: "María García",
+          email: "maria@example.com",
           isactive: true,
           createdat: expect.any(Date),
         },
       ]);
     });
 
-    it('should return empty array when no active employees exist', async () => {
+    it("should return empty array when no active employees exist", async () => {
       // Arrange
       mockEmployeeRepository.findActiveEmployees.mockResolvedValue([]);
 
@@ -91,15 +101,17 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(1);
+      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(
+        1
+      );
       expect(mockStatus).toHaveBeenCalledWith(200);
       expect(mockJson).toHaveBeenCalledWith([]);
     });
 
-    it('should handle repository errors', async () => {
+    it("should handle repository errors", async () => {
       // Arrange
       mockEmployeeRepository.findActiveEmployees.mockRejectedValue(
-        new Error('Database connection failed')
+        new Error("Database connection failed")
       );
 
       // Act
@@ -109,18 +121,20 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(1);
+      expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(
+        1
+      );
       expect(mockStatus).toHaveBeenCalledWith(500);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Error interno del servidor',
-        error: 'Ocurrió un error al obtener los empleados',
+        message: "Internal server error",
+        error: "An error occurred while getting the employees",
       });
     });
   });
 
-  describe('getEmployeePerformance', () => {
-    it('should return employee performance successfully', async () => {
+  describe("getEmployeePerformance", () => {
+    it("should return employee performance successfully", async () => {
       // Arrange
       const employeeId = 1;
       const mockStats = new EmployeeStatsDTO(1);
@@ -130,7 +144,7 @@ describe('AnalyticsController', () => {
         averagefoodsatisfaction: 4.5,
         reviewcount: 10,
       });
-      
+
       mockRequest = {
         params: { id: employeeId.toString() },
       };
@@ -144,15 +158,17 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(employeeId);
+      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(
+        employeeId
+      );
       expect(mockStatus).toHaveBeenCalledWith(200);
       expect(mockJson).toHaveBeenCalledWith(mockStats.toJSON());
     });
 
-    it('should return 400 for invalid employee ID', async () => {
+    it("should return 400 for invalid employee ID", async () => {
       // Arrange
       mockRequest = {
-        params: { id: 'invalid' },
+        params: { id: "invalid" },
       };
 
       // Act
@@ -162,16 +178,18 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockAnalyticsService.getEmployeePerformance).not.toHaveBeenCalled();
+      expect(
+        mockAnalyticsService.getEmployeePerformance
+      ).not.toHaveBeenCalled();
       expect(mockStatus).toHaveBeenCalledWith(400);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'ID de empleado inválido',
-        error: 'El ID debe ser un número válido',
+        message: "Invalid employee ID",
+        error: "The ID must be a valid number",
       });
     });
 
-    it('should return 404 when employee not found', async () => {
+    it("should return 404 when employee not found", async () => {
       // Arrange
       const employeeId = 999;
       mockRequest = {
@@ -179,7 +197,7 @@ describe('AnalyticsController', () => {
       };
 
       mockAnalyticsService.getEmployeePerformance.mockRejectedValue(
-        new Error('Employee not found')
+        new Error("Employee not found")
       );
 
       // Act
@@ -189,16 +207,18 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(employeeId);
+      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(
+        employeeId
+      );
       expect(mockStatus).toHaveBeenCalledWith(404);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Empleado no encontrado',
-        error: 'El empleado especificado no existe',
+        message: "Employee not found",
+        error: "The specified employee does not exist",
       });
     });
 
-    it('should handle other service errors', async () => {
+    it("should handle other service errors", async () => {
       // Arrange
       const employeeId = 1;
       mockRequest = {
@@ -206,7 +226,7 @@ describe('AnalyticsController', () => {
       };
 
       mockAnalyticsService.getEmployeePerformance.mockRejectedValue(
-        new Error('Database error')
+        new Error("Database error")
       );
 
       // Act
@@ -216,16 +236,18 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(employeeId);
+      expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(
+        employeeId
+      );
       expect(mockStatus).toHaveBeenCalledWith(500);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'Error interno del servidor',
-        error: 'Ocurrió un error al obtener el rendimiento del empleado',
+        message: "Internal server error",
+        error: "An error occurred while getting the employee performance",
       });
     });
 
-    it('should handle missing employee ID parameter', async () => {
+    it("should handle missing employee ID parameter", async () => {
       // Arrange
       mockRequest = {
         params: {},
@@ -238,13 +260,15 @@ describe('AnalyticsController', () => {
       );
 
       // Assert
-      expect(mockAnalyticsService.getEmployeePerformance).not.toHaveBeenCalled();
+      expect(
+        mockAnalyticsService.getEmployeePerformance
+      ).not.toHaveBeenCalled();
       expect(mockStatus).toHaveBeenCalledWith(400);
       expect(mockJson).toHaveBeenCalledWith({
         success: false,
-        message: 'ID de empleado inválido',
-        error: 'El ID debe ser un número válido',
+        message: "Invalid employee ID",
+        error: "The ID must be a valid number",
       });
     });
   });
-}); 
+});

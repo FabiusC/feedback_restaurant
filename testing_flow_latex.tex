@@ -1,0 +1,78 @@
+\subsubsection{Testing Strategy and Flow}
+\label{subsubsec:testing_strategy}
+
+The testing architecture follows a **multi-layered approach** with comprehensive coverage across all system components. The testing strategy implements the **AAA (Arrange-Act-Assert)** pattern and utilizes extensive mocking to ensure isolated, reliable tests.
+
+\paragraph{Testing Layers}
+The testing framework is organized into three distinct layers:
+
+\begin{itemize}
+    \item \textbf{Unit Tests}: Individual component testing with mocked dependencies
+    \item \textbf{Integration Tests}: End-to-end API flow validation
+    \item \textbf{Entity/DTO Tests}: Data validation and transformation testing
+\end{itemize}
+
+\paragraph{Test Flow Methodology}
+The testing flow follows a systematic approach where each layer validates specific aspects of the system:
+
+\begin{table}[h]
+\centering
+\caption{Testing Flow and Validation Methods}
+\label{tab:testing_flow}
+\begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Test Name} & \textbf{Input} & \textbf{Expected Output} & \textbf{Validation Purpose} \\
+\hline
+Validate Review DTO & Valid review data with all required fields & DTO validation passes & Ensures data integrity and format compliance \\
+\hline
+Validate Invalid Rating & Rating value outside 1-5 range & ValidationError raised & Tests boundary conditions and data validation \\
+\hline
+Validate Employee Selection & Valid employee ID from database & Employee found and active & Verifies employee existence and status \\
+\hline
+Validate Comment Length & Comment exceeding 500 characters & ValidationError raised & Tests input constraints and business rules \\
+\hline
+Submit Review via Service & Complete review data with valid employee & Review saved with calculated average & Tests business logic and data persistence \\
+\hline
+Handle Database Errors & Database connection failure & Service error response & Validates error handling and graceful degradation \\
+\hline
+Controller HTTP Response & Valid review submission request & HTTP 201 with success response & Tests API contract and response format \\
+\hline
+Integration API Flow & Complete review submission via HTTP & End-to-end success with proper JSON & Validates full request-response cycle \\
+\hline
+Analytics Data Retrieval & Valid employee ID for statistics & Employee performance metrics & Tests data aggregation and calculation logic \\
+\hline
+Public Reviews Filtering & Date range and rating filters & Filtered review list & Validates data filtering and pagination \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Testing Infrastructure}
+The testing framework utilizes Jest with TypeScript support and implements the following key features:
+
+\begin{itemize}
+    \item \textbf{Mock Strategy}: Comprehensive mocking of repositories, services, and external dependencies
+    \item \textbf{Test Isolation}: Each test runs independently with fresh mocks and data
+    \item \textbf{Error Simulation}: Systematic testing of error conditions and edge cases
+    \item \textbf{Response Validation}: Verification of HTTP status codes, JSON structure, and business logic
+\end{itemize}
+
+\paragraph{Test Coverage Metrics}
+The testing suite achieves comprehensive coverage across all system layers:
+
+\begin{itemize}
+    \item \textbf{Line Coverage}: >90\% across all modules
+    \item \textbf{Function Coverage}: >95\% ensuring all methods are tested
+    \item \textbf{Branch Coverage}: >85\% covering conditional logic paths
+\end{itemize}
+
+\paragraph{Key Testing Patterns}
+The implementation follows established testing patterns:
+
+\begin{enumerate}
+    \item \textbf{AAA Pattern}: Arrange (setup), Act (execute), Assert (verify)
+    \item \textbf{Mock Injection}: Dependency injection for isolated testing
+    \item \textbf{Error Boundary Testing}: Validation of error handling mechanisms
+    \item \textbf{Integration Flow Testing}: End-to-end validation of API endpoints
+\end{enumerate}
+
+This testing strategy ensures the reliability, maintainability, and robustness of the restaurant feedback system while providing confidence in the system's behavior under various conditions and edge cases. 

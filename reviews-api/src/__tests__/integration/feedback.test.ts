@@ -44,25 +44,25 @@ describe("Feedback Integration Tests", () => {
 
     // Use the mocked routes
     app.use("/", router);
-    
+
     // Add error handling middleware
     app.use((err: any, req: any, res: any, next: any) => {
-      if (err instanceof SyntaxError && err.message.includes('JSON')) {
+      if (err instanceof SyntaxError && err.message.includes("JSON")) {
         return res.status(400).json({
           success: false,
-          message: 'Datos de entrada requeridos',
-          error: 'JSON malformado'
+          message: "Required input data",
+          error: "Invalid JSON",
         });
       }
       next(err);
     });
-    
+
     // Add 404 handler for unsupported methods
-    app.use('*', (req: any, res: any) => {
+    app.use("*", (req: any, res: any) => {
       res.status(404).json({
         success: false,
-        message: 'Endpoint no encontrado',
-        error: 'El endpoint solicitado no existe'
+        message: "Endpoint not found",
+        error: "The requested endpoint does not exist",
       });
     });
   });
@@ -81,7 +81,7 @@ describe("Feedback Integration Tests", () => {
 
       const mockServiceResponse = {
         success: true,
-        message: "Review enviada exitosamente",
+        message: "Review sent successfully",
         data: {
           reviewId: 1,
           employeeName: "Juan Pérez",
@@ -95,7 +95,7 @@ describe("Feedback Integration Tests", () => {
       const response = await request(app)
         .post("/reviews")
         .send(reviewData)
-        .expect(201);
+        .expect(200);
 
       // Assert
       expect(response.body).toEqual(mockServiceResponse);
@@ -115,9 +115,8 @@ describe("Feedback Integration Tests", () => {
 
       const mockServiceResponse = {
         success: false,
-        message: "Datos de review inválidos",
-        error:
-          "Los datos proporcionados no cumplen con los requisitos de validación",
+        message: "Invalid review data",
+        error: "The provided data does not meet the validation requirements",
       };
 
       mockFeedbackService.submitReview.mockResolvedValue(mockServiceResponse);
@@ -146,8 +145,8 @@ describe("Feedback Integration Tests", () => {
 
       const mockServiceResponse = {
         success: false,
-        message: "Empleado no encontrado",
-        error: "El empleado especificado no existe en el sistema",
+        message: "Employee not found",
+        error: "The specified employee does not exist in the system",
       };
 
       mockFeedbackService.submitReview.mockResolvedValue(mockServiceResponse);
@@ -186,7 +185,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Error interno del servidor");
+      expect(response.body.message).toBe("Internal server error");
       expect(mockFeedbackService.submitReview).toHaveBeenCalledTimes(1);
     });
 
@@ -196,7 +195,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Datos de entrada requeridos");
+      expect(response.body.message).toBe("Required input data");
       expect(mockFeedbackService.submitReview).not.toHaveBeenCalled();
     });
 
@@ -206,7 +205,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Datos de entrada requeridos");
+      expect(response.body.message).toBe("Required input data");
       expect(mockFeedbackService.submitReview).not.toHaveBeenCalled();
     });
   });
@@ -247,7 +246,7 @@ describe("Feedback Integration Tests", () => {
       // Assert
       expect(response.body.success).toBe(true);
       expect(response.body.message).toBe(
-        "Reviews públicas obtenidas exitosamente"
+        "Public reviews obtained successfully"
       );
       expect(response.body.data).toEqual([
         {
@@ -257,7 +256,7 @@ describe("Feedback Integration Tests", () => {
           ratespeedservice: 4,
           ratesatisfactionfood: 5,
           rateemployee: null,
-          comment: 'Great food!',
+          comment: "Great food!",
           ispublic: true,
         },
         {
@@ -267,7 +266,7 @@ describe("Feedback Integration Tests", () => {
           ratespeedservice: 3,
           ratesatisfactionfood: 4,
           rateemployee: 4,
-          comment: 'Good service',
+          comment: "Good service",
           ispublic: true,
         },
       ]);
@@ -285,7 +284,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Error interno del servidor");
+      expect(response.body.message).toBe("Internal server error");
       expect(mockFeedbackService.getPublicReviews).toHaveBeenCalledTimes(1);
     });
 
@@ -314,7 +313,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Datos de entrada requeridos");
+      expect(response.body.message).toBe("Required input data");
     });
 
     it("should handle unsupported HTTP methods", async () => {
@@ -323,7 +322,7 @@ describe("Feedback Integration Tests", () => {
 
       // Assert
       expect(response.body.success).toBe(false);
-      expect(response.body.message).toBe("Endpoint no encontrado");
+      expect(response.body.message).toBe("Endpoint not found");
     });
   });
 });

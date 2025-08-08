@@ -4,7 +4,7 @@ import { Review } from "../../entities/Review";
 import { Employee } from "../../entities/Employee";
 
 /**
- * Helper para crear un mock de Request de Express
+ * Helper to create a mock of the Request object
  */
 export const createMockRequest = (
   body: any = {},
@@ -20,7 +20,7 @@ export const createMockRequest = (
 });
 
 /**
- * Helper para crear un mock de Response de Express
+ * Helper to create a mock of the Response object
  */
 export const createMockResponse = (): Partial<Response> => {
   const res: Partial<Response> = {};
@@ -31,7 +31,7 @@ export const createMockResponse = (): Partial<Response> => {
 };
 
 /**
- * Helper para crear un ReviewDTO válido para pruebas
+ * Helper to create a valid ReviewDTO object for tests
  */
 export const createValidReviewDTO = (
   overrides: Partial<ReviewDTO> = {}
@@ -44,7 +44,7 @@ export const createValidReviewDTO = (
   dto.setComment("Great service!");
   dto.setIsPublic(true);
 
-  // Aplicar overrides
+  // Apply overrides
   Object.entries(overrides).forEach(([key, value]) => {
     const setterName = `set${key.charAt(0).toUpperCase() + key.slice(1)}`;
     if (typeof dto[setterName as keyof ReviewDTO] === "function") {
@@ -56,7 +56,7 @@ export const createValidReviewDTO = (
 };
 
 /**
- * Helper para crear un ReviewDTO sin empleado para pruebas
+ * Helper to create a ReviewDTO object without employee for tests
  */
 export const createReviewDTOWithoutEmployee = (
   overrides: Partial<ReviewDTO> = {}
@@ -69,7 +69,7 @@ export const createReviewDTOWithoutEmployee = (
   dto.setComment("Great food!");
   dto.setIsPublic(true);
 
-  // Aplicar overrides
+  // Apply overrides
   Object.entries(overrides).forEach(([key, value]) => {
     const setterName = `set${key.charAt(0).toUpperCase() + key.slice(1)}`;
     if (typeof dto[setterName as keyof ReviewDTO] === "function") {
@@ -81,12 +81,12 @@ export const createReviewDTOWithoutEmployee = (
 };
 
 /**
- * Helper para crear una entidad Review válida para pruebas
+ * Helper to create a valid Review entity for tests
  */
 export const createValidReview = (overrides: Partial<Review> = {}): Review => {
   const review = new Review(1, 4, 5, 1, 4, "Great service!", true);
 
-  // Aplicar overrides
+  // Apply overrides
   Object.entries(overrides).forEach(([key, value]) => {
     const setterName = `set${key.charAt(0).toUpperCase() + key.slice(1)}`;
     if (typeof review[setterName as keyof Review] === "function") {
@@ -98,14 +98,14 @@ export const createValidReview = (overrides: Partial<Review> = {}): Review => {
 };
 
 /**
- * Helper para crear una entidad Employee válida para pruebas
+ * Helper to create a valid Employee entity for tests
  */
 export const createValidEmployee = (
   overrides: Partial<Employee> = {}
 ): Employee => {
   const employee = new Employee(1, "Juan Pérez", "true");
 
-  // Aplicar overrides
+  // Apply overrides
   Object.entries(overrides).forEach(([key, value]) => {
     const setterName = `set${key.charAt(0).toUpperCase() + key.slice(1)}`;
     if (typeof employee[setterName as keyof Employee] === "function") {
@@ -117,7 +117,7 @@ export const createValidEmployee = (
 };
 
 /**
- * Helper para crear datos de review para requests HTTP
+ * Helper to create review data for HTTP requests
  */
 export const createReviewRequestData = (overrides: any = {}) => ({
   speedRating: 4,
@@ -130,7 +130,7 @@ export const createReviewRequestData = (overrides: any = {}) => ({
 });
 
 /**
- * Helper para crear datos de review sin empleado para requests HTTP
+ * Helper to create review data without employee for HTTP requests
  */
 export const createReviewRequestDataWithoutEmployee = (
   overrides: any = {}
@@ -145,7 +145,7 @@ export const createReviewRequestDataWithoutEmployee = (
 });
 
 /**
- * Helper para crear estadísticas de empleado para pruebas
+ * Helper to create employee statistics for tests
  */
 export const createEmployeeStats = (overrides: any = {}) => ({
   totalReviews: 10,
@@ -159,7 +159,7 @@ export const createEmployeeStats = (overrides: any = {}) => ({
 });
 
 /**
- * Helper para crear estadísticas vacías de empleado
+ * Helper to create empty employee statistics
  */
 export const createEmptyEmployeeStats = () => ({
   totalReviews: 0,
@@ -172,16 +172,16 @@ export const createEmptyEmployeeStats = () => ({
 });
 
 /**
- * Helper para crear una respuesta exitosa del servicio
+ * Helper to create a successful service response
  */
 export const createSuccessServiceResponse = (data: any = {}) => ({
   success: true,
-  message: "Operación exitosa",
+  message: "Operation successful",
   data,
 });
 
 /**
- * Helper para crear una respuesta de error del servicio
+ * Helper to create an error service response
  */
 export const createErrorServiceResponse = (message: string, error: string) => ({
   success: false,
@@ -190,7 +190,7 @@ export const createErrorServiceResponse = (message: string, error: string) => ({
 });
 
 /**
- * Helper para validar que una respuesta HTTP tenga el formato correcto
+ * Helper to validate that an HTTP response has the correct format
  */
 export const validateHttpResponse = (
   response: any,
@@ -209,7 +209,7 @@ export const validateHttpResponse = (
 };
 
 /**
- * Helper para crear un array de reviews para pruebas
+ * Helper to create an array of reviews for tests
  */
 export const createMockReviews = (count: number = 2): Review[] => {
   const reviews: Review[] = [];
@@ -220,10 +220,10 @@ export const createMockReviews = (count: number = 2): Review[] => {
         i,
         3 + (i % 3), // 3, 4, 5
         4 + (i % 2), // 4, 5
-        i % 2 === 0 ? i : null, // Alternar empleados
+        i % 2 === 0 ? i : null, // Alternate employees
         i % 2 === 0 ? 4 : null,
         `Review ${i} - Great service!`,
-        i % 3 !== 0 // 2/3 públicas
+        i % 3 !== 0 // 2/3 public
       )
     );
   }
@@ -232,7 +232,7 @@ export const createMockReviews = (count: number = 2): Review[] => {
 };
 
 /**
- * Helper para limpiar todos los mocks de Jest
+ * Helper to clear all Jest mocks
  */
 export const clearAllMocks = () => {
   jest.clearAllMocks();
@@ -240,13 +240,13 @@ export const clearAllMocks = () => {
 };
 
 /**
- * Helper para esperar que una promesa se resuelva
+ * Helper to wait for a promise to resolve
  */
 export const waitForPromise = (ms: number = 100) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
- * Helper para crear un error personalizado
+ * Helper to create a custom error
  */
 export const createCustomError = (
   message: string,

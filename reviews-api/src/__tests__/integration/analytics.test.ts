@@ -59,8 +59,8 @@ describe("Analytics Integration Tests", () => {
       if (err instanceof SyntaxError && err.message.includes("JSON")) {
         return res.status(400).json({
           success: false,
-          message: "Datos de entrada requeridos",
-          error: "JSON malformado",
+          message: "Required input data",
+          error: "Invalid JSON",
         });
       }
       next(err);
@@ -70,8 +70,8 @@ describe("Analytics Integration Tests", () => {
     app.use("*", (req: any, res: any) => {
       res.status(404).json({
         success: false,
-        message: "Endpoint no encontrado",
-        error: "El endpoint solicitado no existe",
+        message: "Endpoint not found",
+        error: "The requested endpoint does not exist",
       });
     });
   });
@@ -151,8 +151,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error al obtener los empleados",
+        message: "Internal server error",
+        error: "An error occurred while getting the employees",
       });
       expect(mockEmployeeRepository.findActiveEmployees).toHaveBeenCalledTimes(
         1
@@ -203,8 +203,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "ID de empleado inválido",
-        error: "El ID debe ser un número válido",
+        message: "Invalid employee ID",
+        error: "The ID must be a valid number",
       });
       expect(
         mockAnalyticsService.getEmployeePerformance
@@ -226,8 +226,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "Empleado no encontrado",
-        error: "El empleado especificado no existe",
+        message: "Employee not found",
+        error: "The specified employee does not exist",
       });
       expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(
         employeeId
@@ -249,8 +249,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "Error interno del servidor",
-        error: "Ocurrió un error al obtener el rendimiento del empleado",
+        message: "Internal server error",
+        error: "An error occurred while getting the employee performance",
       });
       expect(mockAnalyticsService.getEmployeePerformance).toHaveBeenCalledWith(
         employeeId
@@ -266,8 +266,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "Endpoint no encontrado",
-        error: "El endpoint solicitado no existe",
+        message: "Endpoint not found",
+        error: "The requested endpoint does not exist",
       });
     });
 
@@ -280,8 +280,8 @@ describe("Analytics Integration Tests", () => {
       // Assert
       expect(response.body).toEqual({
         success: false,
-        message: "Endpoint no encontrado",
-        error: "El endpoint solicitado no existe",
+        message: "Endpoint not found",
+        error: "The requested endpoint does not exist",
       });
     });
   });

@@ -16,7 +16,7 @@ export class FeedbackController {
       if (!req.body || Object.keys(req.body).length === 0) {
         res.status(400).json({
           success: false,
-          message: "Input data required",
+          message: "Required input data",
           error: "The request body is empty or invalid",
         });
         return;
@@ -36,12 +36,10 @@ export class FeedbackController {
         // Map specific error messages to appropriate status codes
         if (result.message === "Employee not found") {
           res.status(404).json(result);
-        } else if (result.message === "Inactive employee") {
+        } else if (result.message === "Employee inactive") {
           res.status(400).json(result);
         } else if (result.message === "Internal server error") {
           res.status(500).json(result);
-        } else if (result.message === "Invalid review data types") {
-          res.status(400).json(result);
         } else {
           res.status(400).json(result);
         }
@@ -82,7 +80,7 @@ export class FeedbackController {
       res.status(500).json({
         success: false,
         message: "Internal server error",
-        error: "An unexpected error occurred while obtaining the reviews",
+        error: "An unexpected error occurred while getting the reviews",
       });
     }
   }

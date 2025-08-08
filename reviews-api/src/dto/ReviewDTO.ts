@@ -18,7 +18,7 @@ export class ReviewDTO {
     this.ratesatisfactionfood = ratesatisfactionfood || 0;
     this.idemployee = idemployee || null;
     this.rateemployee = rateemployee || null;
-    this.comment = comment || '';
+    this.comment = comment || "";
     this.ispublic = ispublic;
   }
 
@@ -84,7 +84,12 @@ export class ReviewDTO {
     }
 
     // Validar que si hay empleado, debe haber calificación de empleado
-    if (this.idemployee !== null && (this.rateemployee === null || this.rateemployee < 1 || this.rateemployee > 5)) {
+    if (
+      this.idemployee !== null &&
+      (this.rateemployee === null ||
+        this.rateemployee < 1 ||
+        this.rateemployee > 5)
+    ) {
       return false;
     }
 
@@ -119,7 +124,11 @@ export class ReviewDTO {
       json.idemployee || json.idEmployeeSelected || null,
       json.rateemployee || json.employeeRating || null,
       json.comment || "",
-      json.ispublic !== undefined ? json.ispublic : json.isPublic !== undefined ? json.isPublic : undefined
+      json.ispublic !== undefined
+        ? json.ispublic
+        : json.isPublic !== undefined
+        ? json.isPublic
+        : undefined
     );
   }
 
