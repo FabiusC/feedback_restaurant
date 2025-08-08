@@ -1,103 +1,103 @@
-# API de Feedback de Restaurante
+# Restaurant Feedback API
 
-Una API RESTful construida con TypeScript y Node.js para gestionar el sistema de feedback y reviews de un restaurante, siguiendo una arquitectura de capas bien definida.
+A RESTful API built with Node.js, TypeScript, and PostgreSQL to manage customer feedback for a restaurant. This project is part of a full-stack application that includes a web frontend.
 
-## 🏗️ Arquitectura
+## 🏗️ Architecture
 
-La aplicación sigue una arquitectura de capas basada en el diagrama UML proporcionado:
+The application follows a layered architecture:
 
-### Capas de la Arquitectura
+### Architecture Layers
 
-1. **Domain Entities** - Entidades del dominio de negocio
+1. **Domain Entities** - Business domain entities
 
-   - `Employee` - Empleado del restaurante
-   - `Review` - Review/feedback de un cliente
-   - `Report` - Reporte de análisis
+   - `Employee` - Restaurant employee
+   - `Review` - Customer review/feedback
+   - `Report` - Analysis report
 
-2. **Data Transfer Objects (DTOs)** - Objetos de transferencia de datos
+2. **Data Transfer Objects (DTOs)** - Data transfer objects
 
-   - `ReviewDTO` - Para transferir datos de reviews
-   - `EmployeeStatsDTO` - Para estadísticas de empleados
+   - `ReviewDTO` - For transferring review data
+   - `EmployeeStatsDTO` - For employee statistics
 
-3. **Data Access Layer** - Capa de acceso a datos
+3. **Data Access Layer** - Data access layer
 
-   - `EmployeeRepository` - Operaciones CRUD para empleados
-   - `ReviewRepository` - Operaciones CRUD para reviews
-   - `DatabaseConnection` - Conexión a PostgreSQL
+   - `EmployeeRepository` - CRUD operations for employees
+   - `ReviewRepository` - CRUD operations for reviews
+   - `DatabaseConnection` - PostgreSQL connection
 
-4. **Service Layer** - Capa de servicios de negocio
-   - `FeedbackService` - Lógica de negocio para feedback
-   - `AnalyticsService` - Lógica de negocio para análisis
+4. **Service Layer** - Business service layer
+   - `FeedbackService` - Business logic for feedback
+   - `AnalyticsService` - Business logic for analytics
 
-## 🚀 Características
+## 🚀 Features
 
-- ✅ Arquitectura de capas bien definida
-- ✅ TypeScript para tipado estático
-- ✅ PostgreSQL como base de datos
-- ✅ Validación de datos
-- ✅ Manejo de errores robusto
-- ✅ Logging de requests
-- ✅ Documentación automática de API
+- ✅ Well-defined layered architecture
+- ✅ TypeScript for static typing
+- ✅ PostgreSQL as database
+- ✅ Data validation
+- ✅ Robust error handling
+- ✅ Request logging
+- ✅ Automatic API documentation
 - ✅ Health checks
-- ✅ CORS habilitado
-- ✅ Seguridad con Helmet
+- ✅ CORS enabled
+- ✅ Security with Helmet
 
-## 📋 User Stories Implementadas
+## 📋 Implemented User Stories
 
-### Funcionalidades de Calificación
+### Rating Functionalities
 
 - ✅ Rate Speed Service from 1 to 5 stars
 - ✅ Rate the level of Satisfaction with Food from 1 to 5 stars
-- ✅ Select Employee to Rate (opcional)
-- ✅ Rate Employee Attitude from 1 to 5 stars (cuando se selecciona empleado)
+- ✅ Select Employee to Rate (optional)
+- ✅ Rate Employee Attitude from 1 to 5 stars (when employee is selected)
 
-### Funcionalidades de Comentarios
+### Comment Functionalities
 
-- ✅ Leave a comment about our service (máximo 500 caracteres)
+- ✅ Leave a comment about our service (maximum 500 characters)
 - ✅ Read Customer Comments
 - ✅ Sort or filter comments by date
 - ✅ Sort or filter reviews by date
 
-### Funcionalidades de Análisis
+### Analytics Functionalities
 
 - ✅ View Average Ratings per Category
 - ✅ Press "Submit" Button
 
-### Validaciones de Negocio
+### Business Validations
 
-- ✅ Si se selecciona un empleado, se debe calificar al empleado
-- ✅ Si no se selecciona empleado, no se puede calificar al empleado
-- ✅ Comentarios públicos no pueden estar vacíos
-- ✅ Límite de 500 caracteres en comentarios
+- ✅ If an employee is selected, the employee must be rated
+- ✅ If no employee is selected, employee cannot be rated
+- ✅ Public comments cannot be empty
+- ✅ 500 character limit on comments
 
-## 📋 Prerrequisitos
+## 📋 Prerequisites
 
-- Node.js (v16 o superior)
-- PostgreSQL (v12 o superior)
-- npm o yarn
+- Node.js (v16 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
-1. **Clonar el repositorio**
+1. **Clone the repository**
 
    ```bash
    git clone <repository-url>
    cd reviews-api
    ```
 
-2. **Instalar dependencias**
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-3. **Configurar variables de entorno**
+3. **Configure environment variables**
 
    ```bash
    cp env.example .env
    ```
 
-   Editar el archivo `.env` con tus configuraciones:
+   Edit the `.env` file with your configurations:
 
    ```env
    DB_HOST=localhost
@@ -109,115 +109,95 @@ La aplicación sigue una arquitectura de capas basada en el diagrama UML proporc
    NODE_ENV=development
    ```
 
-4. **Crear la base de datos**
+4. **Create the database**
 
    ```sql
    CREATE DATABASE feedback_restaurant;
    ```
 
-5. **Compilar TypeScript**
+5. **Compile TypeScript**
 
    ```bash
    npm run build
    ```
 
-6. **Ejecutar la aplicación**
+6. **Run the application**
 
    ```bash
-   # Desarrollo
+   # Development
    npm run dev
 
-   # Producción
+   # Production
    npm start
    ```
 
-## 📚 Endpoints de la API
+## 📚 API Endpoints
 
 ### Health Check
 
-- `GET /health` - Verificar estado del servidor
+- `GET /health` - Check server status
 
 ### Feedback
 
-- `POST /feedback/reviews` - Enviar una nueva review
-- `GET /feedback/reviews/public` - Obtener reviews públicas
-- `GET /feedback/reviews/:id` - Obtener una review específica
-- `PUT /feedback/reviews/:id/approve` - Aprobar una review
-- `PUT /feedback/reviews/:id/reject` - Rechazar una review
-- `DELETE /feedback/reviews/:id` - Eliminar una review
+- `POST /reviews` - Submit a new review
+- `GET /reviews/public` - Get public reviews
 
 ### Analytics
 
-- `GET /analytics/ratings` - Obtener promedios de calificaciones
-- `GET /analytics/employees/:id/performance` - Rendimiento de un empleado
-- `GET /analytics/employees/performance` - Rendimiento de todos los empleados
-- `GET /analytics/employees/top-performers` - Mejores empleados
-- `GET /analytics/reports/monthly` - Generar reporte mensual
-- `POST /analytics/reports/custom` - Generar reporte personalizado
-- `GET /analytics/trends` - Obtener tendencias de rendimiento
+- `GET /employees` - Get rating averages
+- `GET /employees/:id/stats` - Employee performance
+- `GET /employees/:id` - Employee details
 
-## 📝 Ejemplos de Uso
+## 📝 Usage Examples
 
-### Enviar una Review
+### Submit a Review
 
 ```bash
-curl -X POST http://localhost:3000/feedback/reviews \
+curl -X POST http://localhost:3000/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "ratespeedservice": 4,
     "ratesatisfactionfood": 5,
     "idemployee": 1,
     "rateemployee": 4,
-    "comment": "Excelente servicio y comida deliciosa",
+    "comment": "Excellent service and delicious food",
     "ispublic": true
   }'
 ```
 
-**Nota:** También se aceptan los nombres de campos anteriores para compatibilidad:
+**Note:** Previous field names are also accepted for compatibility:
 
 ```bash
-curl -X POST http://localhost:3000/feedback/reviews \
+curl -X POST http://localhost:3000/reviews \
   -H "Content-Type: application/json" \
   -d '{
     "speedRating": 4,
     "foodRating": 5,
     "idEmployeeSelected": 1,
     "employeeRating": 4,
-    "comment": "Excelente servicio y comida deliciosa",
+    "comment": "Excellent service and delicious food",
     "isPublic": true
   }'
 ```
 
-### Obtener Reviews Públicas
+### Get Public Reviews
 
 ```bash
-curl http://localhost:3000/feedback/reviews/public?sortBy=rating
+curl http://localhost:3000/reviews/public
 ```
 
-### Obtener Promedios de Calificaciones
+## 🧪 Available Scripts
 
-```bash
-curl http://localhost:3000/analytics/ratings
-```
+- `npm run dev` - Run in development mode with hot reload
+- `npm run build` - Compile TypeScript
+- `npm start` - Run in production mode
+- `npm test` - Run tests
+- `npm run lint` - Check code with ESLint
+- `npm run lint:fix` - Automatically fix ESLint errors
 
-### Generar Reporte Mensual
+## 🗄️ Database Structure
 
-```bash
-curl http://localhost:3000/analytics/reports/monthly
-```
-
-## 🧪 Scripts Disponibles
-
-- `npm run dev` - Ejecutar en modo desarrollo con hot reload
-- `npm run build` - Compilar TypeScript
-- `npm start` - Ejecutar en modo producción
-- `npm test` - Ejecutar tests
-- `npm run lint` - Verificar código con ESLint
-- `npm run lint:fix` - Corregir errores de ESLint automáticamente
-
-## 🗄️ Estructura de la Base de Datos
-
-### Tabla: employee
+### Table: employee
 
 - `idemployee` (SERIAL PRIMARY KEY)
 - `name` (VARCHAR(35) NOT NULL)
@@ -225,7 +205,7 @@ curl http://localhost:3000/analytics/reports/monthly
 - `isactive` (BOOLEAN DEFAULT true)
 - `createdat` (TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP)
 
-### Tabla: review
+### Table: review
 
 - `idreview` (SERIAL PRIMARY KEY)
 - `idemployee` (INTEGER REFERENCES employee(idemployee) ON DELETE SET NULL)
@@ -236,51 +216,35 @@ curl http://localhost:3000/analytics/reports/monthly
 - `comment` (VARCHAR(500))
 - `ispublic` (BOOLEAN DEFAULT false)
 
-**Restricciones:**
+**Constraints:**
 
-- Si `idemployee` es NULL, `rateemployee` debe ser NULL
-- Si `idemployee` no es NULL, `rateemployee` debe tener un valor entre 1-5
+- If `idemployee` is NULL, `rateemployee` must be NULL
+- If `idemployee` is not NULL, `rateemployee` must have a value between 1-5
 
-## 🔧 Configuración de Desarrollo
+## 🔧 Development Configuration
 
-### Variables de Entorno
+### Environment Variables
 
-- `DB_HOST` - Host de PostgreSQL
-- `DB_PORT` - Puerto de PostgreSQL
-- `DB_NAME` - Nombre de la base de datos
-- `DB_USER` - Usuario de PostgreSQL
-- `DB_PASSWORD` - Contraseña de PostgreSQL
-- `PORT` - Puerto del servidor
-- `NODE_ENV` - Entorno (development/production)
+- `DB_HOST` - PostgreSQL host
+- `DB_PORT` - PostgreSQL port
+- `DB_NAME` - Database name
+- `DB_USER` - PostgreSQL user
+- `DB_PASSWORD` - PostgreSQL password
+- `PORT` - Server port
+- `NODE_ENV` - Environment (development/production)
 
-### Estructura del Proyecto
+### Project Structure
 
 ```
 src/
-├── controllers/          # Controladores HTTP
-├── data/                # Capa de acceso a datos
-│   ├── database/        # Configuración de base de datos
-│   └── repositories/    # Repositorios
-├── domain/              # Entidades del dominio
-│   └── entities/        # Entidades de negocio
+├── controllers/          # HTTP controllers
+├── data/                # Data access layer
+│   ├── database/        # Database configuration
+│   └── repositories/    # Repositories
+├── domain/              # Domain layer
+│   └── entities/        # Business entities
 ├── dto/                 # Data Transfer Objects
-├── routes/              # Definición de rutas
-├── services/            # Capa de servicios
-└── index.ts            # Punto de entrada
+├── routes/              # Route definitions
+├── services/            # Service layer
+└── index.ts            # Entry point
 ```
-
-## 🤝 Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
-
-## 🆘 Soporte
-
-Si tienes alguna pregunta o problema, por favor abre un issue en el repositorio.

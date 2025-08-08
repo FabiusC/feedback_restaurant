@@ -56,12 +56,9 @@ feedback-app/
 
 ### Dashboard (`/dashboard/`)
 
-- **Real-time Analytics**: Live gauge charts showing service ratings
-- **Employee Performance**: Individual employee rating displays with progress bars
 - **Review Management**: View all public reviews with scrolling functionality
 - **Auto-refresh**: Data updates every 30 seconds
 - **Responsive Design**: Works on desktop, tablet, and mobile
-- **Toggle Reviews**: Expand/collapse reviews section
 
 ### Feedback Form (`/feedback/`)
 
@@ -71,15 +68,6 @@ feedback-app/
 - **Success Animation**: Celebratory modal with confetti and waving hands
 - **Public/Private Toggle**: Choose review visibility
 - **Mobile-First Design**: Optimized for mobile devices
-
-## 🎨 Design Features
-
-- **Modern UI**: Clean, professional design with gradients
-- **Smooth Animations**: CSS transitions and hover effects
-- **Custom Scrollbars**: Styled scrollbars for better UX
-- **Loading States**: Spinner indicators during API calls
-- **Responsive Layout**: Adapts to different screen sizes
-- **Celebration Effects**: Confetti animation on successful submission
 
 ## 🔧 Technical Details
 
@@ -99,10 +87,10 @@ feedback-app/
 
 ## 📊 API Endpoints Used
 
-- `GET /api/reviews/reviews/public` - Fetch public reviews
-- `POST /api/reviews/reviews` - Submit new review
-- `GET /api/employees` - Fetch employee list
-- `GET /api/employees/employees/:id/stats` - Employee statistics
+- `GET /reviews/public` - Fetch public reviews
+- `POST /reviews` - Submit new review
+- `GET /employees` - Fetch employee list
+- `GET /employees/:id/stats` - Employee statistics
 
 ## 🛠️ Development
 
@@ -114,7 +102,6 @@ feedback-app/
 
 ### Code Quality
 
-- **ES6+ Features**: Arrow functions, async/await, destructuring
 - **Error Handling**: Try-catch blocks with user-friendly messages
 - **Performance**: Efficient DOM manipulation and API calls
 - **Accessibility**: Semantic HTML and keyboard navigation
@@ -128,40 +115,11 @@ The application is designed with a mobile-first approach:
 - **Optimized Forms**: Easy-to-use on mobile devices
 - **Fast Loading**: Optimized for mobile networks
 
-## 🚀 Deployment
-
-The application can be deployed to any static hosting service:
-
-- **GitHub Pages**
-- **Netlify**
-- **Vercel**
-- **AWS S3**
-- **Any web server**
-
-Simply upload the `feedback-app` folder contents to your hosting provider.
-
-## 🎯 Key Features Implemented
-
-### Dashboard
-
-- ✅ **Gauge Charts**: Speed service, food satisfaction, and employee performance
-- ✅ **Employee List**: Scrollable list with individual ratings
-- ✅ **Reviews Section**: Toggleable reviews with employee badges
-- ✅ **Real-time Data**: Auto-refresh every 30 seconds
-- ✅ **Responsive Design**: Works on all devices
-
 ### Feedback Form
 
 - ✅ **Star Ratings**: Interactive 5-star system for all categories
 - ✅ **Employee Dropdown**: Populated from API
 - ✅ **Form Validation**: Client-side validation with helpful messages
 - ✅ **Success Animation**: Celebratory modal with confetti
-- ✅ **Mobile Optimized**: Touch-friendly interface
 
-## 📝 License
-
-This project is part of the Restaurant Feedback System.
-
----
-
-**Authors**: Restaurant Feedback System Team
+**Authors**: Fabio Hurtado - Juan Garnica
