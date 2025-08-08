@@ -1,5 +1,3 @@
-import { Review } from "../entities/Review";
-
 export class EmployeeStatsDTO {
   private employeeId: number;
   private averageemployeerating: number;

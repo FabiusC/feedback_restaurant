@@ -3,7 +3,6 @@ import express from "express";
 import { AnalyticsController } from "../../controllers/AnalyticsController";
 import { AnalyticsService } from "../../services/AnalyticsService";
 import { EmployeeRepository } from "../../data/repositories/EmployeeRepository";
-import analyticsRoutes from "../../routes/analyticsRoutes";
 
 // Mock the services and repositories
 jest.mock("../../services/AnalyticsService");
@@ -41,7 +40,7 @@ describe("Analytics Integration Tests", () => {
     (analyticsController as any).employeeRepository = mockEmployeeRepository;
 
     // Create custom router with mocked controller
-    const router = require("express").Router();
+    const router = express.Router();
     router.get(
       "/employees",
       analyticsController.getEmployees.bind(analyticsController)

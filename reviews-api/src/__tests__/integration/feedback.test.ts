@@ -2,7 +2,6 @@ import request from "supertest";
 import express from "express";
 import { FeedbackController } from "../../controllers/FeedbackController";
 import { FeedbackService } from "../../services/FeedbackService";
-import feedbackRoutes from "../../routes/feedbackRoutes";
 
 // Mock the service layer
 jest.mock("../../services/FeedbackService");
@@ -32,7 +31,7 @@ describe("Feedback Integration Tests", () => {
     (feedbackController as any).feedbackService = mockFeedbackService;
 
     // Replace the controller in the routes with our mocked version
-    const router = require("express").Router();
+    const router = express.Router();
     router.post(
       "/reviews",
       feedbackController.submitReview.bind(feedbackController)
